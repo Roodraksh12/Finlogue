@@ -43,7 +43,7 @@ export default function BottomNav() {
     progress.set(activeIndex);
   }, []);
 
-  const DRAG_STEP_PX = 60;
+  const DRAG_STEP_PX = 58;
   const startProgress = useMotionValue(0);
 
   const handlePanStart = () => startProgress.set(progress.get());
@@ -87,10 +87,14 @@ export default function BottomNav() {
   };
 
   const lensLeft = useTransform(progress, 
-    [0, 1, 2, 3], 
-    [6, 66, 126, 186]
+    [0, 0.5, 1, 1.5, 2, 2.5, 3], 
+    [6,   6,  64,  64, 122, 122, 180]
   );
-  const lensWidth = 48;
+  
+  const lensWidth = useTransform(progress, 
+    [0, 0.5,  1, 1.5,  2, 2.5,  3], 
+    [110, 168, 110, 168, 110, 168, 110]
+  );
 
   return (
     <nav className="bottom-nav-container">
@@ -122,6 +126,9 @@ export default function BottomNav() {
 function TabItem({ tab, index, progress, onClick }) {
   const Icon = tab.icon;
 
+  const widthRange = [0, 1, 2, 3].map(i => i === index ? 110 : 52);
+  const tabWidth = useTransform(progress, [0, 1, 2, 3], widthRange);
+
   const opacityRange = [0, 1, 2, 3].map(i => i === index ? 1 : 0);
   const textOpacity = useTransform(progress, [0, 1, 2, 3], opacityRange);
   const inverseOpacity = useTransform(textOpacity, v => 1 - v);
@@ -129,28 +136,36 @@ function TabItem({ tab, index, progress, onClick }) {
   return (
     <motion.button
       onClick={onClick}
+      style={{ width: tabWidth }}
       className="nav-tab-item"
       aria-label={tab.label}
     >
-      <div className="nav-icon-container">
-        <div className="nav-icon-inner">
-          <motion.div style={{ opacity: inverseOpacity }} className="icon-outline-wrapper">
-            <Icon size={22} strokeWidth={1.5} />
-          </motion.div>
+      <div className="relative flex items-center justify-center min-w-max">
+        <div className="nav-icon-container">
+          <div className="nav-icon-inner">
+            <motion.div style={{ opacity: inverseOpacity }} className="icon-outline-wrapper">
+              <Icon size={24} strokeWidth={1.5} />
+            </motion.div>
 
-          <motion.div style={{ opacity: textOpacity }} className="icon-solid-wrapper">
-            <Icon size={22} strokeWidth={2.5} />
-          </motion.div>
+            <motion.div style={{ opacity: textOpacity }} className="icon-solid-wrapper">
+              <Icon size={24} strokeWidth={2.5} />
+            </motion.div>
+          </div>
         </div>
-      </div>
-      
-      <div className="nav-label-container">
-        <motion.span style={{ opacity: inverseOpacity }} className="label-outline-wrapper">
-          {tab.label}
-        </motion.span>
-        <motion.span style={{ opacity: textOpacity }} className="label-solid-wrapper">
-          {tab.label}
-        </motion.span>
+        
+        <motion.div 
+          style={{ 
+            opacity: textOpacity,
+            width: useTransform(textOpacity, [0, 1], [0, 50]),
+            paddingLeft: useTransform(textOpacity, [0, 1], [0, 8]),
+            overflow: "hidden"
+          }}
+          className="morphing-text-container"
+        >
+          <span className="label-solid-text whitespace-nowrap">
+            {tab.label}
+          </span>
+        </motion.div>
       </div>
     </motion.button>
   );

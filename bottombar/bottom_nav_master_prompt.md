@@ -1,20 +1,20 @@
-# Master Prompt: Physics-Based Optical Lens Bottom Navigation
+# Master Prompt: Physics-Based Optical Lens Bottom Navigation (Morphing Pill Type)
 
-You can use the following prompt to ask any AI (or use it as a reference for yourself) to implement the exact same bottom navigation bar in another project. 
+You can use the following prompt to ask any AI (or use it as a reference for yourself) to implement the exact same bottom navigation bar in another project. This version uses **lucide-react** for the icons, includes the **expanding pill shape** (morphs from `52px` to `110px` with text), and perfectly replicates the **native iOS frosted glass blur** over the active tab!
 
 ---
 
 **Copy and paste the text below into your new AI conversation:**
 
 ```text
-I want to build a highly interactive, physics-based bottom navigation bar using React, Tailwind CSS, Framer Motion, and Heroicons. I have the exact code and CSS needed. Please create the necessary files in my project and ensure the dependencies are installed.
+I want to build a highly interactive, physics-based bottom navigation bar using React, Tailwind CSS, Framer Motion, and Lucide React. I have the exact code and CSS needed. Please create the necessary files in my project and ensure the dependencies are installed.
 
 ### 1. Dependencies
 First, ensure these dependencies are installed:
-npm install framer-motion @heroicons/react react-router-dom
+npm install framer-motion lucide-react react-router-dom
 
-### 2. CSS Styles
-Add the following classes to my global CSS file (e.g., `index.css` or `globals.css`) under the `@layer components` directive (if using Tailwind) or just as regular CSS:
+### 2. CSS Styles (The Optical Blur Effect)
+Add the following classes to my global CSS file (e.g., `index.css` or `globals.css`) under the `@layer components` directive (if using Tailwind) or just as regular CSS. This creates the exact frosted glass refraction look for the active tab pill:
 
 ```css
 @layer components {
@@ -36,14 +36,13 @@ Add the following classes to my global CSS file (e.g., `index.css` or `globals.c
 }
 ```
 
-### 3. Component Code
+### 3. Component Code (The Morphing Pill Logic)
 Create a new file named `BottomNav.jsx` (or `.tsx`) and use the following code. Note that you may need to adjust the imports (like `useStore` or `cn`) depending on how state management and utility functions are handled in this new project.
 
 ```jsx
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { HomeIcon as HomeOutline, HeartIcon as HeartOutline, ClipboardDocumentListIcon as OrdersOutline, ShoppingBagIcon as CartOutline } from '@heroicons/react/24/outline';
-import { HomeIcon as HomeSolid, HeartIcon as HeartSolid, ClipboardDocumentListIcon as OrdersSolid, ShoppingBagIcon as CartSolid } from '@heroicons/react/24/solid';
+import { Home, Heart, ClipboardList, ShoppingBasket } from 'lucide-react';
 // Replace this with your project's store or prop logic
 import { useStore } from '../store/useStore'; 
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
@@ -57,10 +56,10 @@ export default function BottomNav() {
 
   // Define tabs
   const tabs = [
-    { id: 'home', to: '/', iconOutline: HomeOutline, iconSolid: HomeSolid, label: 'Home' },
-    { id: 'saved', to: '/wishlist', iconOutline: HeartOutline, iconSolid: HeartSolid, label: 'Saved' },
-    { id: 'orders', to: '/orders', iconOutline: OrdersOutline, iconSolid: OrdersSolid, label: 'Orders' },
-    { id: 'cart', action: toggleCart, iconOutline: CartOutline, iconSolid: CartSolid, label: 'Cart', badge: cartCount }
+    { id: 'home', to: '/', icon: Home, label: 'Home' },
+    { id: 'saved', to: '/wishlist', icon: Heart, label: 'Saved' },
+    { id: 'orders', to: '/orders', icon: ClipboardList, label: 'Orders' },
+    { id: 'cart', action: toggleCart, icon: ShoppingBasket, label: 'Cart', badge: cartCount }
   ];
 
   const [activeTab, setActiveTab] = useState(tabs[0].id);
@@ -80,7 +79,7 @@ export default function BottomNav() {
     progress.set(activeIndex);
   }, []);
 
-  const DRAG_STEP_PX = 60;
+  const DRAG_STEP_PX = 58;
   const startProgress = useMotionValue(0);
 
   const handlePanStart = () => startProgress.set(progress.get());
@@ -102,12 +101,16 @@ export default function BottomNav() {
     else navigate(tabObj.to);
   };
 
-  // Maps the lens position based on progress. Adjust these values if tab sizes change.
   const lensLeft = useTransform(progress, 
-    [0, 1, 2, 3], 
-    [6, 66, 126, 186]
+    [0, 0.5, 1, 1.5, 2, 2.5, 3], 
+    [6,   6,  64,  64, 122, 122, 180]
   );
-  const lensWidth = 44;
+  
+  // The expanding morph width for the glass pill
+  const lensWidth = useTransform(progress, 
+    [0, 0.5,  1, 1.5,  2, 2.5,  3], 
+    [110, 168, 110, 168, 110, 168, 110]
+  );
 
   return (
     <nav className="md:hidden fixed bottom-6 left-4 right-4 z-40 h-[64px] flex items-center justify-center pointer-events-none">
@@ -115,16 +118,14 @@ export default function BottomNav() {
         onPanStart={handlePanStart}
         onPan={handlePan} 
         onPanEnd={handlePanEnd}
-        className="relative flex items-center gap-[16px] pointer-events-auto bg-white/30 backdrop-blur-sm border border-white/40 p-[6px] rounded-full shadow-lg touch-none"
-        style={{ width: 236, height: 56 }}
+        className="relative flex items-center gap-[6px] pointer-events-auto bg-white/30 backdrop-blur-sm border border-white/40 p-[6px] rounded-full shadow-lg touch-none"
+        style={{ width: 296, height: 64 }}
       >
-        {/* ── Native iOS Frosted Glass Lens (z-20) ── */}
         <motion.div
           className="absolute top-[6px] bottom-[6px] optical-lens z-20 rounded-full pointer-events-none"
           style={{ left: lensLeft, width: lensWidth }}
         />
 
-        {/* ── Tab Items ── */}
         {tabs.map((tab, i) => (
           <TabItem 
             key={tab.id} 
@@ -145,8 +146,11 @@ export default function BottomNav() {
 }
 
 function TabItem({ tab, index, progress, onClick }) {
-  const IconOutline = tab.iconOutline;
-  const IconSolid = tab.iconSolid;
+  const Icon = tab.icon;
+
+  // Expanding Pill Width Morphing
+  const widthRange = [0, 1, 2, 3].map(i => i === index ? 110 : 52);
+  const tabWidth = useTransform(progress, [0, 1, 2, 3], widthRange);
 
   const opacityRange = [0, 1, 2, 3].map(i => i === index ? 1 : 0);
   const textOpacity = useTransform(progress, [0, 1, 2, 3], opacityRange);
@@ -155,27 +159,45 @@ function TabItem({ tab, index, progress, onClick }) {
   return (
     <motion.button
       onClick={onClick}
-      className="relative flex items-center justify-center w-[44px] h-[44px] rounded-full flex-shrink-0 cursor-pointer"
+      style={{ width: tabWidth }}
+      className="relative flex items-center justify-center h-[52px] rounded-full flex-shrink-0 cursor-pointer"
       aria-label={tab.label}
     >
-      <div className="relative flex items-center justify-center w-full h-full">
+      <div className="relative flex items-center justify-center min-w-max">
+        
         <div className="relative w-[24px] h-[24px] flex-shrink-0">
           <motion.div style={{ opacity: inverseOpacity }} className="absolute inset-0 z-10 text-slate-500 flex items-center justify-center">
-            <IconOutline className="w-[24px] h-[24px]" strokeWidth={1.5} />
+            <Icon size={24} strokeWidth={1.8} />
           </motion.div>
 
           <motion.div style={{ opacity: textOpacity }} className="absolute inset-0 z-30 text-blue-600 drop-shadow-sm flex items-center justify-center">
-            <IconSolid className="w-[24px] h-[24px]" />
+            <Icon size={24} strokeWidth={2.5} />
           </motion.div>
 
           {tab.badge > 0 && (
-            <span 
+            <motion.span 
+              style={{ opacity: inverseOpacity }}
               className="absolute -top-[6px] -right-[6px] z-30 bg-blue-600 text-white text-[9px] font-bold w-[16px] h-[16px] rounded-full flex items-center justify-center shadow-md"
             >
               {tab.badge > 9 ? '9+' : tab.badge}
-            </span>
+            </motion.span>
           )}
         </div>
+
+        {/* Morphing Text Label */}
+        <motion.div 
+          style={{ 
+            opacity: textOpacity,
+            width: useTransform(textOpacity, [0, 1], [0, 50]),
+            paddingLeft: useTransform(textOpacity, [0, 1], [0, 8]),
+            overflow: "hidden"
+          }}
+          className="relative z-30 flex items-center justify-start"
+        >
+          <span className="font-label text-[11px] font-bold uppercase tracking-widest text-blue-600 whitespace-nowrap drop-shadow-sm">
+            {tab.label}
+          </span>
+        </motion.div>
       </div>
     </motion.button>
   );
