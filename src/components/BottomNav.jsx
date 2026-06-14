@@ -140,7 +140,7 @@ function TabItem({ tab, index, progress, onClick }) {
       className="nav-tab-item"
       aria-label={tab.label}
     >
-      <div className="relative flex items-center justify-center min-w-max">
+      <div className="tab-content-wrapper">
         <div className="nav-icon-container">
           <div className="nav-icon-inner">
             <motion.div style={{ opacity: inverseOpacity }} className="icon-outline-wrapper">
@@ -162,7 +162,7 @@ function TabItem({ tab, index, progress, onClick }) {
           }}
           className="morphing-text-container"
         >
-          <span className="label-solid-text whitespace-nowrap">
+          <span className="label-solid-text">
             {tab.label}
           </span>
         </motion.div>

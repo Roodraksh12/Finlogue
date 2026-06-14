@@ -65,13 +65,22 @@
   outline: none;
 }
 
+.tab-content-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: max-content;
+}
+
 .nav-icon-container {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  height: 100%;
+  height: 24px;
+  width: 24px;
 }
 
 .nav-icon-inner {
@@ -117,4 +126,5 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--color-canvas);
+  white-space: nowrap;
 }
