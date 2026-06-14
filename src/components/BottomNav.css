@@ -34,6 +34,7 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05);
   touch-action: none;
   height: 64px;
+  overflow: hidden;
 }
 
 .optical-lens {

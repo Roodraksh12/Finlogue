@@ -208,20 +208,26 @@ function TabItem({ tab, index, progress, onClick }) {
   );
 }
 
-function GooeyAnchor({ index, progress, tab }) {
-  // Center point of the inactive tab
-  const center = [32, 90, 148, 206][index];
+function GooeyAnchor({ index, progress }) {
+  const leftArrays = [
+    [41, 16, 16, 16],
+    [124, 118, 74, 74],
+    [182, 220, 173.5, 132],
+    [240, 278, 273, 229]
+  ];
+  
+  const anchorLeft = useTransform(progress, [0, 1, 2, 3], leftArrays[index]);
   
   const anchorOpacity = useTransform(progress, 
-    [index - 1, index - 0.5, index, index + 0.5, index + 1], 
-    [0, 1, 1, 1, 0]
+    [index - 1, index - 0.5, index - 0.15, index, index + 0.15, index + 0.5, index + 1], 
+    [0,         1,           1,            0,     1,            1,           0]
   );
 
   return (
     <motion.div 
       className="absolute top-[16px] rounded-full"
       style={{ 
-        left: center - 16, 
+        left: anchorLeft, 
         width: 32, 
         height: 32,
         opacity: anchorOpacity,
