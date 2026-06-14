@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Home, LayoutGrid, Landmark, Handshake } from 'lucide-react';
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
@@ -39,18 +39,41 @@ export default function BottomNav() {
     }
   }, [location.pathname, location.hash]);
 
-  useEffect(() => {
-    progress.set(activeIndex);
-  }, []);
+  const scrollTargets = useRef({ pOffset: 0, iOffset: 0 });
 
-  const DRAG_STEP_PX = 58;
-  const startProgress = useMotionValue(0);
+  const handlePanStart = () => {
+    if (location.pathname === '/') {
+      const portfolioEl = document.getElementById('portfolio');
+      const investorsEl = document.getElementById('investors');
+      if (portfolioEl && investorsEl) {
+        scrollTargets.current = {
+          pOffset: Math.max(0, portfolioEl.getBoundingClientRect().top + window.scrollY - 80),
+          iOffset: Math.max(0, investorsEl.getBoundingClientRect().top + window.scrollY - 80)
+        };
+      }
+    }
+  };
 
-  const handlePanStart = () => startProgress.set(progress.get());
+  const handlePan = (event, info) => {
+    const deltaX = info.offset.x;
+    const scrubAmount = deltaX / 60; 
+    let newProgress = activeIndex + scrubAmount;
+    
+    newProgress = Math.max(0, Math.min(newProgress, tabs.length - 1));
+    progress.set(newProgress);
 
-  const handlePan = (e, info) => {
-    const rawNewProgress = startProgress.get() + (info.offset.x / DRAG_STEP_PX);
-    progress.set(Math.max(0, Math.min(tabs.length - 1, rawNewProgress)));
+    if (location.pathname === '/') {
+      const { pOffset, iOffset } = scrollTargets.current;
+      let targetScroll = 0;
+      if (newProgress <= 1) {
+        targetScroll = pOffset * newProgress;
+      } else if (newProgress <= 2) {
+        targetScroll = pOffset + (iOffset - pOffset) * (newProgress - 1);
+      } else {
+        targetScroll = iOffset;
+      }
+      window.scrollTo(0, targetScroll);
+    }
   };
 
   const handlePanEnd = (e, info) => {
