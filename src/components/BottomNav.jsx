@@ -10,10 +10,10 @@ export default function BottomNav() {
 
   // Define tabs matching Finlogue's sections
   const tabs = [
-    { id: 'home', to: '/', icon: Home, label: 'Home' },
-    { id: 'portfolio', to: '/#portfolio', icon: LayoutGrid, label: 'Portfolio' },
-    { id: 'investors', to: '/#investors', icon: Landmark, label: 'Investors' },
-    { id: 'partner', to: '/partner', icon: Handshake, label: 'Partner' }
+    { id: 'home', to: '/', icon: Home, label: 'Home', activeWidth: 90, textWidth: 30 },
+    { id: 'portfolio', to: '/#portfolio', icon: LayoutGrid, label: 'Portfolio', activeWidth: 140, textWidth: 80 },
+    { id: 'investors', to: '/#investors', icon: Landmark, label: 'Investors', activeWidth: 135, textWidth: 75 },
+    { id: 'partner', to: '/partner', icon: Handshake, label: 'Partner', activeWidth: 120, textWidth: 60 }
   ];
 
   const [activeTab, setActiveTab] = useState(tabs[0].id);
@@ -93,7 +93,12 @@ export default function BottomNav() {
   
   const lensWidth = useTransform(progress, 
     [0, 0.5,  1, 1.5,  2, 2.5,  3], 
-    [138, 196, 138, 196, 138, 196, 138]
+    [90, 198, 140, 193, 135, 178, 120]
+  );
+
+  const pillWidth = useTransform(progress, 
+    [0, 1, 2, 3], 
+    [276, 326, 321, 306]
   );
 
   return (
@@ -103,6 +108,7 @@ export default function BottomNav() {
         onPan={handlePan} 
         onPanEnd={handlePanEnd}
         className="bottom-nav-pill"
+        style={{ width: pillWidth }}
       >
         <motion.div
           className="optical-lens"
@@ -126,7 +132,7 @@ export default function BottomNav() {
 function TabItem({ tab, index, progress, onClick }) {
   const Icon = tab.icon;
 
-  const widthRange = [0, 1, 2, 3].map(i => i === index ? 138 : 52);
+  const widthRange = [0, 1, 2, 3].map(i => i === index ? tab.activeWidth : 52);
   const tabWidth = useTransform(progress, [0, 1, 2, 3], widthRange);
 
   const opacityRange = [0, 1, 2, 3].map(i => i === index ? 1 : 0);
@@ -156,7 +162,7 @@ function TabItem({ tab, index, progress, onClick }) {
         <motion.div 
           style={{ 
             opacity: textOpacity,
-            width: useTransform(textOpacity, [0, 1], [0, 78]),
+            width: useTransform(textOpacity, [0, 1], [0, tab.textWidth]),
             paddingLeft: useTransform(textOpacity, [0, 1], [0, 8]),
             overflow: "hidden"
           }}
