@@ -127,6 +127,16 @@ p {
   opacity: 0.9;
 }
 
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 72px; /* Prevent content from hiding behind bottom nav */
+  }
+}
+
 .btn-outline {
   background: transparent;
   color: var(--color-primary);
