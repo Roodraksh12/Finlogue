@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Home, LayoutGrid, Landmark, Handshake } from 'lucide-react';
-import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import { motion, useMotionValue, useTransform, animate, useMotionTemplate } from 'framer-motion';
 import './BottomNav.css';
 
 export default function BottomNav() {
@@ -107,132 +107,115 @@ export default function BottomNav() {
     [64, 52, 64, 52, 64, 52, 64]
   );
 
+  // The Clip Path that perfectly bounds the magnified layer inside the glass lens
+  const clipPath = useMotionTemplate`inset(6px calc(100% - (${lensLeft}px + ${lensWidth}px)) 6px ${lensLeft}px round 9999px)`;
+
   return (
-    <>
-      <svg style={{ position: 'absolute', width: 0, height: 0 }} aria-hidden="true">
-        <defs>
-          <filter id="goo">
-            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
-            <feColorMatrix in="blur" mode="matrix" values="
-              1 0 0 0 0  
-              0 1 0 0 0  
-              0 0 1 0 0  
-              0 0 0 19 -9" result="goo" />
-            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-          </filter>
-        </defs>
-      </svg>
-      
-      <nav className="bottom-nav-container">
-        <motion.div 
-          onPanStart={handlePanStart}
-          onPan={handlePan} 
-          onPanEnd={handlePanEnd}
-          className="bottom-nav-pill"
-          style={{ width: pillWidth, height: pillHeight }}
-        >
-          
-          <div className="gooey-layer" style={{ filter: "url('#goo')" }}>
-            <motion.div
-              className="optical-lens"
-              style={{ left: lensLeft, width: lensWidth }}
+    <nav className="bottom-nav-container">
+      <motion.div 
+        onPanStart={handlePanStart}
+        onPan={handlePan} 
+        onPanEnd={handlePanEnd}
+        className="bottom-nav-pill"
+        style={{ width: pillWidth, height: pillHeight }}
+      >
+        
+        {/* BASE LAYER (Unmagnified) */}
+        <div className="tabs-layer z-10">
+          {tabs.map((tab, i) => (
+            <TabItem 
+              key={`base-${tab.id}`} 
+              tab={tab} 
+              index={i} 
+              progress={progress} 
+              onClick={() => handleTabClick(tab, i)}
+              isMagnified={false}
             />
-            {tabs.map((tab, i) => (
-              <GooeyAnchor key={`anchor-${tab.id}`} index={i} progress={progress} tab={tab} />
-            ))}
-          </div>
+          ))}
+        </div>
 
-          <div className="tabs-foreground">
-            {tabs.map((tab, i) => (
-              <TabItem 
-                key={tab.id} 
-                tab={tab} 
-                index={i} 
-                progress={progress} 
-                onClick={() => handleTabClick(tab, i)}
-              />
-            ))}
-          </div>
+        {/* CLEAR GLASS LENS */}
+        <motion.div
+          className="optical-lens-glass"
+          style={{ left: lensLeft, width: lensWidth }}
+        />
 
+        {/* MAGNIFIED LAYER (Clipped to the moving glass) */}
+        <motion.div 
+          className="tabs-layer z-30 pointer-events-none"
+          style={{ clipPath }}
+        >
+          {tabs.map((tab, i) => (
+            <TabItem 
+              key={`mag-${tab.id}`} 
+              tab={tab} 
+              index={i} 
+              progress={progress} 
+              onClick={() => {}} 
+              isMagnified={true}
+            />
+          ))}
         </motion.div>
-      </nav>
-    </>
+
+      </motion.div>
+    </nav>
   );
 }
 
-function TabItem({ tab, index, progress, onClick }) {
+function TabItem({ tab, index, progress, onClick, isMagnified }) {
+  const tabWidth = useTransform(progress, 
+    [index - 1, index, index + 1], 
+    [52, tab.activeWidth, 52]
+  );
+  
+  const textOpacity = useTransform(progress, 
+    [index - 0.5, index, index + 0.5], 
+    [0, 1, 0]
+  );
+
   const Icon = tab.icon;
-
-  const widthRange = [0, 1, 2, 3].map(i => i === index ? tab.activeWidth : 52);
-  const tabWidth = useTransform(progress, [0, 1, 2, 3], widthRange);
-
-  const opacityRange = [0, 1, 2, 3].map(i => i === index ? 1 : 0);
-  const textOpacity = useTransform(progress, [0, 1, 2, 3], opacityRange);
-  const inverseOpacity = useTransform(textOpacity, v => 1 - v);
 
   return (
     <motion.button
-      onClick={onClick}
-      style={{ width: tabWidth }}
       className="nav-tab-item"
+      style={{ width: tabWidth }}
+      onClick={onClick}
+      tabIndex={isMagnified ? -1 : 0}
       aria-label={tab.label}
     >
-      <div className="tab-content-wrapper">
-        <div className="nav-icon-container">
-          <div className="nav-icon-inner">
-            <motion.div style={{ opacity: inverseOpacity }} className="icon-outline-wrapper">
-              <Icon size={24} strokeWidth={1.5} />
-            </motion.div>
-
-            <motion.div style={{ opacity: textOpacity }} className="icon-solid-wrapper">
-              <Icon size={24} strokeWidth={2.5} />
-            </motion.div>
-          </div>
-        </div>
-        
-        <motion.div 
-          style={{ 
-            opacity: textOpacity,
-            width: useTransform(textOpacity, [0, 1], [0, tab.textWidth]),
-            paddingLeft: useTransform(textOpacity, [0, 1], [0, 8]),
-            overflow: "hidden"
-          }}
-          className="morphing-text-container"
-        >
-          <span className="label-solid-text">
-            {tab.label}
-          </span>
-        </motion.div>
+      <div 
+        className={`nav-icon-inner ${isMagnified ? 'text-black' : 'text-slate-500'}`}
+        style={{ 
+          transform: isMagnified ? 'scale(1.15)' : 'scale(1)', 
+          transition: 'transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <Icon 
+          size={24} 
+          strokeWidth={isMagnified ? 2.5 : 2} 
+          fill={isMagnified ? "currentColor" : "none"} 
+        />
       </div>
+      <motion.div 
+        style={{ 
+          opacity: textOpacity,
+          width: useTransform(textOpacity, [0, 1], [0, tab.textWidth]),
+          paddingLeft: useTransform(textOpacity, [0, 1], [0, 8]),
+          overflow: "hidden",
+          color: isMagnified ? '#000' : '#475569',
+          transform: isMagnified ? 'scale(1.05)' : 'scale(1)',
+          transformOrigin: 'left center',
+          fontWeight: isMagnified ? '900' : '700'
+        }}
+        className="morphing-text-container"
+      >
+        <span className="label-solid-text">
+          {tab.label}
+        </span>
+      </motion.div>
     </motion.button>
-  );
-}
-
-function GooeyAnchor({ index, progress }) {
-  const leftArrays = [
-    [41, 16, 16, 16],
-    [124, 118, 74, 74],
-    [182, 220, 173.5, 132],
-    [240, 278, 273, 229]
-  ];
-  
-  const anchorLeft = useTransform(progress, [0, 1, 2, 3], leftArrays[index]);
-  
-  const anchorOpacity = useTransform(progress, 
-    [index - 1, index - 0.5, index - 0.15, index, index + 0.15, index + 0.5, index + 1], 
-    [0,         1,           1,            0,     1,            1,           0]
-  );
-
-  return (
-    <motion.div 
-      className="absolute top-[16px] rounded-full"
-      style={{ 
-        left: anchorLeft, 
-        width: 32, 
-        height: 32,
-        opacity: anchorOpacity,
-        backgroundColor: 'var(--color-ink)'
-      }} 
-    />
   );
 }
