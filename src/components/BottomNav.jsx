@@ -93,7 +93,7 @@ export default function BottomNav() {
   
   const lensWidth = useTransform(progress, 
     [0, 0.5,  1, 1.5,  2, 2.5,  3], 
-    [110, 168, 110, 168, 110, 168, 110]
+    [138, 196, 138, 196, 138, 196, 138]
   );
 
   return (
@@ -126,7 +126,7 @@ export default function BottomNav() {
 function TabItem({ tab, index, progress, onClick }) {
   const Icon = tab.icon;
 
-  const widthRange = [0, 1, 2, 3].map(i => i === index ? 110 : 52);
+  const widthRange = [0, 1, 2, 3].map(i => i === index ? 138 : 52);
   const tabWidth = useTransform(progress, [0, 1, 2, 3], widthRange);
 
   const opacityRange = [0, 1, 2, 3].map(i => i === index ? 1 : 0);
@@ -156,7 +156,7 @@ function TabItem({ tab, index, progress, onClick }) {
         <motion.div 
           style={{ 
             opacity: textOpacity,
-            width: useTransform(textOpacity, [0, 1], [0, 50]),
+            width: useTransform(textOpacity, [0, 1], [0, 78]),
             paddingLeft: useTransform(textOpacity, [0, 1], [0, 8]),
             overflow: "hidden"
           }}
