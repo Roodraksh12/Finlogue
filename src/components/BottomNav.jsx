@@ -10,10 +10,10 @@ export default function BottomNav() {
 
   // Define tabs matching Finlogue's sections
   const tabs = [
-    { id: 'home', to: '/', icon: Home, label: 'Home', activeWidth: 110, textWidth: 50 },
-    { id: 'portfolio', to: '/#portfolio', icon: LayoutGrid, label: 'Portfolio', activeWidth: 150, textWidth: 90 },
-    { id: 'investors', to: '/#investors', icon: Landmark, label: 'Investors', activeWidth: 150, textWidth: 90 },
-    { id: 'partner', to: '/partner', icon: Handshake, label: 'Partner', activeWidth: 140, textWidth: 80 }
+    { id: 'home', to: '/', icon: Home, label: 'Home', activeWidth: 102, textWidth: 42 },
+    { id: 'portfolio', to: '/#portfolio', icon: LayoutGrid, label: 'Portfolio', activeWidth: 140, textWidth: 80 },
+    { id: 'investors', to: '/#investors', icon: Landmark, label: 'Investors', activeWidth: 135, textWidth: 75 },
+    { id: 'partner', to: '/partner', icon: Handshake, label: 'Partner', activeWidth: 130, textWidth: 70 }
   ];
 
   const [activeTab, setActiveTab] = useState(tabs[0].id);
@@ -93,12 +93,12 @@ export default function BottomNav() {
   
   const lensWidth = useTransform(progress, 
     [0, 0.5,  1, 1.5,  2, 2.5,  3], 
-    [110, 208, 150, 208, 150, 198, 140]
+    [102, 198, 140, 193, 135, 188, 130]
   );
 
   const pillWidth = useTransform(progress, 
     [0, 1, 2, 3], 
-    [296, 336, 336, 326]
+    [288, 326, 321, 316]
   );
 
   return (
