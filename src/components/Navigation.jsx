@@ -1,6 +1,6 @@
 import React from 'react';
-import { Home, LayoutGrid, Landmark, Handshake } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import BottomNav from './BottomNav';
 import './Navigation.css';
 
 const Navigation = () => {
@@ -62,25 +62,7 @@ const Navigation = () => {
         </div>
 
       </nav>
-
-      <div className="mobile-bottom-nav mobile-only">
-        <a href="#home" className="mobile-tab" onClick={scrollToTop}>
-          <Home size={20} />
-          <span>Home</span>
-        </a>
-        <a href="#portfolio" className="mobile-tab" onClick={(e) => scrollToSection(e, 'portfolio')}>
-          <LayoutGrid size={20} />
-          <span>Portfolio</span>
-        </a>
-        <a href="#investors" className="mobile-tab" onClick={(e) => scrollToSection(e, 'investors')}>
-          <Landmark size={20} />
-          <span>Investors</span>
-        </a>
-        <a href="/partner" className="mobile-tab" onClick={handlePartnerClick}>
-          <Handshake size={20} />
-          <span>Partner</span>
-        </a>
-      </div>
+      <BottomNav />
     </>
   );
 };
