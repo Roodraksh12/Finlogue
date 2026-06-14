@@ -92,8 +92,8 @@ export default function BottomNav() {
   );
   
   const lensWidth = useTransform(progress, 
-    [0, 0.5, 1, 1.5, 2, 2.5, 3], 
-    [102, 160, 140, 190, 135, 180, 130]
+    [0, 1, 2, 3], 
+    [102, 140, 135, 130]
   );
 
   const pillWidth = useTransform(progress, 
@@ -132,7 +132,7 @@ export default function BottomNav() {
           style={{ width: pillWidth, height: pillHeight }}
         >
           
-          <div className="gooey-layer">
+          <div className="gooey-layer" style={{ filter: "url('#goo')" }}>
             <motion.div
               className="optical-lens"
               style={{ left: lensLeft, width: lensWidth }}
@@ -209,19 +209,21 @@ function TabItem({ tab, index, progress, onClick }) {
 }
 
 function GooeyAnchor({ index, progress, tab }) {
-  const leftPos = [6, 64, 122, 180][index];
+  // Center point of the inactive tab
+  const center = [32, 90, 148, 206][index];
   
   const anchorOpacity = useTransform(progress, 
-    [index - 1, index - 0.6, index, index + 0.6, index + 1], 
+    [index - 1, index - 0.5, index, index + 0.5, index + 1], 
     [0, 1, 1, 1, 0]
   );
 
   return (
     <motion.div 
-      className="absolute top-[6px] bottom-[6px] rounded-full"
+      className="absolute top-[16px] rounded-full"
       style={{ 
-        left: leftPos, 
-        width: tab.activeWidth, 
+        left: center - 16, 
+        width: 32, 
+        height: 32,
         opacity: anchorOpacity,
         backgroundColor: 'var(--color-ink)'
       }} 
