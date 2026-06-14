@@ -1,0 +1,132 @@
+.portfolio-section {
+  background-color: var(--color-canvas);
+  padding: 120px 0;
+}
+
+.portfolio-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.portfolio-header h2 {
+  margin: 16px 0 24px;
+}
+
+.cohere-trust-text {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  color: var(--color-ink);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.potr-band {
+  background-color: var(--color-dark-navy);
+  color: var(--color-canvas);
+  border-radius: var(--radius-md);
+  padding: 64px;
+  margin-bottom: 80px;
+}
+
+.potr-content {
+  max-width: 800px;
+}
+
+.potr-content h3 {
+  font-size: 2.5rem;
+  margin: 16px 0 24px;
+  color: var(--color-canvas);
+}
+
+.potr-content p {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 48px;
+}
+
+.potr-stats {
+  display: flex;
+  gap: 64px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 32px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.stat-label {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+}
+
+.cohere-trust-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  padding-top: 40px;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.trust-logo-text {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--color-slate);
+  opacity: 0.6;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  cursor: default;
+}
+
+.trust-logo-text:hover {
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.startup-link {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.startup-link:hover {
+  color: var(--color-coral);
+}
+
+@media (max-width: 1024px) {
+  .cohere-trust-strip {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .potr-band {
+    padding: 32px;
+  }
+  
+  .potr-content h3 {
+    font-size: 2rem;
+  }
+  
+  .potr-stats {
+    flex-direction: column;
+    gap: 32px;
+  }
+  
+  .cohere-trust-strip {
+    gap: 24px;
+  }
+  
+  .trust-logo-text {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,115 @@
+.partner-page {
+  padding: 16px 0 40px;
+  background-color: var(--color-canvas);
+  min-height: calc(100vh - 84px);
+}
+
+.partner-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.partner-header h2 {
+  margin: 8px 0;
+}
+
+.partner-header p {
+  color: var(--color-slate);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+}
+
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: var(--color-canvas);
+  padding: 32px 48px;
+  border: 1px solid var(--color-hairline);
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-slate);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 12px;
+  border: 1px solid var(--color-hairline);
+  background-color: var(--color-soft-stone);
+  color: var(--color-ink);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--color-coral);
+  background-color: var(--color-canvas);
+}
+
+.form-submit {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  margin-top: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.form-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.success-message {
+  text-align: center;
+  padding: 40px 0;
+}
+
+.success-message h3 {
+  color: var(--color-coral);
+  margin-bottom: 16px;
+  font-family: var(--font-display);
+  font-size: 2rem;
+}
+
+.success-message p {
+  font-family: var(--font-body);
+  color: var(--color-slate);
+  font-size: 1.125rem;
+}
+
+.error-message {
+  color: #dc2626;
+  margin-top: 16px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .partner-page {
+    padding: 120px 0 80px;
+  }
+  
+  .form-container {
+    padding: 32px 24px;
+    border-left: none;
+    border-right: none;
+  }
+}

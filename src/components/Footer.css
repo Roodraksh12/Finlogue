@@ -1,0 +1,115 @@
+.footer-section {
+  background-color: var(--color-primary);
+  color: var(--color-canvas);
+  padding: 80px 0;
+  border-top: 4px solid var(--color-coral); /* Matches the gold top bar in the screenshot */
+  text-align: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-title {
+  color: var(--color-coral); /* Gold color */
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.footer-subtitle {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  color: var(--color-canvas);
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+.footer-contact {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  color: var(--color-canvas);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-contact a {
+  color: var(--color-canvas);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contact a:hover {
+  color: var(--color-coral);
+}
+
+.footer-bottom-info {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+}
+
+.footer-socials a {
+  color: var(--color-coral);
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.footer-socials a:hover {
+  opacity: 0.8;
+}
+
+.divider {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+  .footer-title {
+    font-size: 2rem;
+  }
+  
+  .footer-subtitle {
+    font-size: 1.125rem;
+  }
+  
+  .footer-contact, .footer-bottom-info {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .footer-contact .divider, .footer-bottom-info .divider {
+    display: none;
+  }
+}

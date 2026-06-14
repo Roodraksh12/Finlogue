@@ -1,0 +1,43 @@
+.capabilities-section {
+  background-color: var(--color-soft-stone);
+}
+
+.capabilities-header {
+  max-width: 800px;
+  margin-bottom: 64px;
+}
+
+.capabilities-header h2 {
+  margin: 16px 0 24px;
+}
+
+.cohere-taxonomy-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.blog-filter-chip {
+  background: transparent;
+  color: var(--color-coral);
+  border: 1px solid var(--color-coral);
+  border-radius: var(--radius-pill);
+  padding: 12px 24px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 1.125rem;
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.blog-filter-chip:hover {
+  background: var(--color-coral);
+  color: var(--color-cohere-black);
+}
+
+@media (max-width: 768px) {
+  .blog-filter-chip {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+}

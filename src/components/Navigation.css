@@ -1,0 +1,131 @@
+.announcement-bar {
+  background-color: var(--color-cohere-black);
+  color: var(--color-canvas);
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.cohere-nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  background: var(--color-canvas);
+  border-bottom: 1px solid transparent;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo-text {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+  color: var(--color-cohere-black);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-link {
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 0.95rem;
+  transition: opacity 0.2s ease;
+}
+
+.nav-link:hover {
+  opacity: 0.6;
+}
+
+.desktop-only {
+  display: flex;
+}
+
+.mobile-only {
+  display: none;
+}
+
+.mobile-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--color-canvas);
+  padding: 24px;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-menu-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mobile-nav-link {
+  color: var(--color-ink);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 500;
+}
+
+.mobile-nav-divider {
+  height: 1px;
+  background: var(--color-hairline);
+  margin: 16px 0;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none !important;
+  }
+  
+  .mobile-only {
+    display: flex;
+  }
+  
+  .cohere-nav {
+    padding: 20px 24px;
+  }
+}

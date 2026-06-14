@@ -1,0 +1,68 @@
+.offerings-section {
+  /* Inherits bg-green-band from index.css */
+}
+
+.offerings-header {
+  max-width: 800px;
+  margin-bottom: 80px;
+}
+
+.offerings-header h2 {
+  margin: 16px 0 24px;
+}
+
+.cohere-subtitle {
+  font-size: 1.25rem;
+  opacity: 0.9;
+}
+
+.cohere-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.dark-panel-card {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-icon {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-canvas);
+  margin-bottom: 24px;
+}
+
+.dark-panel-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  letter-spacing: 0;
+}
+
+.dark-panel-card p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .cohere-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cohere-card-grid {
+    grid-template-columns: 1fr;
+  }
+}
