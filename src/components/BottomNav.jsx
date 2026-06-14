@@ -87,13 +87,13 @@ export default function BottomNav() {
   };
 
   const lensLeft = useTransform(progress, 
-    [0, 0.5, 1, 1.5, 2, 2.5, 3], 
-    [6,   6,  64,  64, 122, 122, 180]
+    [0, 1, 2, 3], 
+    [6, 64, 122, 180]
   );
   
   const lensWidth = useTransform(progress, 
-    [0, 0.5,  1, 1.5,  2, 2.5,  3], 
-    [102, 198, 140, 193, 135, 188, 130]
+    [0, 1, 2, 3], 
+    [102, 140, 135, 130]
   );
 
   const pillWidth = useTransform(progress, 
