@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, LayoutGrid, Users, Sparkles } from 'lucide-react';
+import { Home, LayoutGrid, Landmark, Handshake } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Navigation.css';
 
@@ -73,11 +73,11 @@ const Navigation = () => {
           <span>Portfolio</span>
         </a>
         <a href="#investors" className="mobile-tab" onClick={(e) => scrollToSection(e, 'investors')}>
-          <Users size={20} />
+          <Landmark size={20} />
           <span>Investors</span>
         </a>
         <a href="/partner" className="mobile-tab" onClick={handlePartnerClick}>
-          <Sparkles size={20} />
+          <Handshake size={20} />
           <span>Partner</span>
         </a>
       </div>
