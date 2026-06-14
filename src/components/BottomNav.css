@@ -53,8 +53,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 52px;
-  border-radius: 26px;
+  height: 100%;
+  border-radius: 9999px;
   flex-shrink: 0;
   cursor: pointer;
   background: none;

@@ -35,7 +35,7 @@ export default function BottomNav() {
     const idx = tabs.findIndex(t => t.id === currentId);
     if (idx !== -1 && idx !== activeIndex) {
       setActiveTab(tabs[idx].id);
-      animate(progress, idx, { type: "spring", stiffness: 400, damping: 32 });
+      animate(progress, idx, { type: "spring", stiffness: 450, damping: 22, mass: 0.8 });
     }
   }, [location.pathname, location.hash]);
 
@@ -62,7 +62,7 @@ export default function BottomNav() {
 
   const handleTabClick = (tab, index) => {
     setActiveTab(tab.id);
-    animate(progress, index, { type: "spring", stiffness: 450, damping: 32 });
+    animate(progress, index, { type: "spring", stiffness: 450, damping: 22, mass: 0.8 });
     
     if (tab.to.startsWith('/#')) {
       const sectionId = tab.to.replace('/#', '');
@@ -87,18 +87,24 @@ export default function BottomNav() {
   };
 
   const lensLeft = useTransform(progress, 
-    [0, 1, 2, 3], 
-    [6, 64, 122, 180]
+    [0, 0.5, 1, 1.5, 2, 2.5, 3], 
+    [6,   6,  64,  64, 122, 122, 180]
   );
   
   const lensWidth = useTransform(progress, 
-    [0, 1, 2, 3], 
-    [102, 140, 135, 130]
+    [0, 0.5, 1, 1.5, 2, 2.5, 3], 
+    [102, 160, 140, 190, 135, 180, 130]
   );
 
   const pillWidth = useTransform(progress, 
-    [0, 1, 2, 3], 
-    [288, 326, 321, 316]
+    [0, 0.5, 1, 1.5, 2, 2.5, 3], 
+    [288, 330, 326, 350, 321, 340, 316]
+  );
+
+  // Volume-preserving liquid height compression
+  const pillHeight = useTransform(progress,
+    [0, 0.5, 1, 1.5, 2, 2.5, 3],
+    [64, 52, 64, 52, 64, 52, 64]
   );
 
   return (
@@ -108,7 +114,7 @@ export default function BottomNav() {
         onPan={handlePan} 
         onPanEnd={handlePanEnd}
         className="bottom-nav-pill"
-        style={{ width: pillWidth }}
+        style={{ width: pillWidth, height: pillHeight }}
       >
         <motion.div
           className="optical-lens"
