@@ -23,7 +23,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   pointer-events: auto;
   background-color: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(32px) saturate(200%);
@@ -33,8 +33,8 @@
   border-radius: 9999px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05);
   touch-action: none;
-  width: 236px;
-  height: 56px;
+  width: 240px;
+  height: 64px;
 }
 
 .optical-lens {
@@ -51,11 +51,12 @@
 .nav-tab-item {
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 9999px;
+  width: 48px;
+  height: 52px;
+  border-radius: 26px;
   flex-shrink: 0;
   cursor: pointer;
   background: none;
@@ -63,6 +64,7 @@
   padding: 0;
   -webkit-tap-highlight-color: transparent;
   outline: none;
+  gap: 2px;
 }
 
 .nav-icon-container {
@@ -100,4 +102,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.nav-label-container {
+  position: relative;
+  height: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.label-outline-wrapper {
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-slate);
+  z-index: 10;
+}
+
+.label-solid-wrapper {
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-canvas);
+  z-index: 30;
 }

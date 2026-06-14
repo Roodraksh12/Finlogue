@@ -90,7 +90,7 @@ export default function BottomNav() {
     [0, 1, 2, 3], 
     [6, 66, 126, 186]
   );
-  const lensWidth = 44;
+  const lensWidth = 48;
 
   return (
     <nav className="bottom-nav-container">
@@ -135,13 +135,22 @@ function TabItem({ tab, index, progress, onClick }) {
       <div className="nav-icon-container">
         <div className="nav-icon-inner">
           <motion.div style={{ opacity: inverseOpacity }} className="icon-outline-wrapper">
-            <Icon size={24} strokeWidth={1.5} />
+            <Icon size={22} strokeWidth={1.5} />
           </motion.div>
 
           <motion.div style={{ opacity: textOpacity }} className="icon-solid-wrapper">
-            <Icon size={24} strokeWidth={2.5} />
+            <Icon size={22} strokeWidth={2.5} />
           </motion.div>
         </div>
+      </div>
+      
+      <div className="nav-label-container">
+        <motion.span style={{ opacity: inverseOpacity }} className="label-outline-wrapper">
+          {tab.label}
+        </motion.span>
+        <motion.span style={{ opacity: textOpacity }} className="label-solid-wrapper">
+          {tab.label}
+        </motion.span>
       </div>
     </motion.button>
   );
