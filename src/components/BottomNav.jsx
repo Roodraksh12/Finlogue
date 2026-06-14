@@ -108,30 +108,55 @@ export default function BottomNav() {
   );
 
   return (
-    <nav className="bottom-nav-container">
-      <motion.div 
-        onPanStart={handlePanStart}
-        onPan={handlePan} 
-        onPanEnd={handlePanEnd}
-        className="bottom-nav-pill"
-        style={{ width: pillWidth, height: pillHeight }}
-      >
-        <motion.div
-          className="optical-lens"
-          style={{ left: lensLeft, width: lensWidth }}
-        />
+    <>
+      <svg style={{ position: 'absolute', width: 0, height: 0 }} aria-hidden="true">
+        <defs>
+          <filter id="goo">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="
+              1 0 0 0 0  
+              0 1 0 0 0  
+              0 0 1 0 0  
+              0 0 0 19 -9" result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+          </filter>
+        </defs>
+      </svg>
+      
+      <nav className="bottom-nav-container">
+        <motion.div 
+          onPanStart={handlePanStart}
+          onPan={handlePan} 
+          onPanEnd={handlePanEnd}
+          className="bottom-nav-pill"
+          style={{ width: pillWidth, height: pillHeight }}
+        >
+          
+          <div className="gooey-layer">
+            <motion.div
+              className="optical-lens"
+              style={{ left: lensLeft, width: lensWidth }}
+            />
+            {tabs.map((tab, i) => (
+              <GooeyAnchor key={`anchor-${tab.id}`} index={i} progress={progress} tab={tab} />
+            ))}
+          </div>
 
-        {tabs.map((tab, i) => (
-          <TabItem 
-            key={tab.id} 
-            tab={tab} 
-            index={i} 
-            progress={progress} 
-            onClick={() => handleTabClick(tab, i)}
-          />
-        ))}
-      </motion.div>
-    </nav>
+          <div className="tabs-foreground">
+            {tabs.map((tab, i) => (
+              <TabItem 
+                key={tab.id} 
+                tab={tab} 
+                index={i} 
+                progress={progress} 
+                onClick={() => handleTabClick(tab, i)}
+              />
+            ))}
+          </div>
+
+        </motion.div>
+      </nav>
+    </>
   );
 }
 
@@ -180,5 +205,26 @@ function TabItem({ tab, index, progress, onClick }) {
         </motion.div>
       </div>
     </motion.button>
+  );
+}
+
+function GooeyAnchor({ index, progress, tab }) {
+  const leftPos = [6, 64, 122, 180][index];
+  
+  const anchorOpacity = useTransform(progress, 
+    [index - 1, index - 0.6, index, index + 0.6, index + 1], 
+    [0, 1, 1, 1, 0]
+  );
+
+  return (
+    <motion.div 
+      className="absolute top-[6px] bottom-[6px] rounded-full"
+      style={{ 
+        left: leftPos, 
+        width: tab.activeWidth, 
+        opacity: anchorOpacity,
+        backgroundColor: 'var(--color-ink)'
+      }} 
+    />
   );
 }
