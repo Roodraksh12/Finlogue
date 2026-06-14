@@ -43,9 +43,8 @@ To run this project locally, follow these steps:
 
 ```text
 Finlogue/
-├── public/                 # Static assets (images, icons, redirects)
-│   ├── investors/          # Investor profile headshots
-│   └── _redirects          # Netlify routing configuration
+├── public/                 # Static assets (images, icons)
+│   └── investors/          # Investor profile headshots
 ├── src/
 │   ├── components/         # Reusable UI sections (Hero, About, Portfolio, etc.)
 │   ├── pages/              # Top-level page views (HomePage, PartnerPage)
@@ -58,9 +57,8 @@ Finlogue/
 
 ## 🌐 Deployment
 
-This project is configured for out-of-the-box deployment on platforms like **Vercel** or **Netlify**.
+This project is configured for out-of-the-box deployment on **Vercel**.
 - **Vercel:** Auto-detects the Vite configuration. Simply import the GitHub repository.
-- **Netlify:** The `public/_redirects` file is already included to ensure React Router paths don't return 404 errors on refresh.
 
 ## 🤝 Contributing
 
