@@ -34,6 +34,18 @@
   display: block;
 }
 
+.hero-logo-highlight {
+  background-color: var(--color-cohere-black);
+  color: var(--color-canvas);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px; /* Slight rounding for a premium feel, change to 0 if sharp is needed */
+  margin-left: 4px;
+  line-height: 1;
+}
+
 .hero-subtitle {
   font-size: 1.25rem;
   color: var(--color-ink);

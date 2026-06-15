@@ -91,20 +91,52 @@ const Hero = () => {
             style={{ y: yText, opacity: opacityText }}
           >
             <motion.h1 
-              variants={containerVariants}
               initial="hidden"
               animate="visible"
-              style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+              style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "2px" }}
             >
-              {letters.map((letter, index) => (
-                <motion.span 
-                  key={index} 
-                  variants={letterVariants}
-                  style={{ display: "inline-block", willChange: "transform, filter, opacity" }}
-                >
-                  {letter}
-                </motion.span>
-              ))}
+              <div style={{ display: "flex" }}>
+                {"FIN".split("").map((letter, index) => (
+                  <motion.span 
+                    key={`fin-${index}`} 
+                    custom={index}
+                    variants={{
+                      hidden: letterVariants.hidden,
+                      visible: (i) => ({
+                        ...letterVariants.visible,
+                        transition: { ...letterVariants.visible.transition, delay: 0.1 + i * 0.08 }
+                      })
+                    }}
+                    style={{ display: "inline-block", willChange: "transform, filter, opacity" }}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </div>
+              
+              <motion.div 
+                className="hero-logo-highlight"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                {"LOGUE".split("").map((letter, index) => (
+                  <motion.span 
+                    key={`logue-${index}`} 
+                    custom={index + 3}
+                    variants={{
+                      hidden: letterVariants.hidden,
+                      visible: (i) => ({
+                        ...letterVariants.visible,
+                        transition: { ...letterVariants.visible.transition, delay: 0.1 + i * 0.08 }
+                      })
+                    }}
+                    style={{ display: "inline-block", willChange: "transform, filter, opacity" }}
+                  >
+                    {letter}
+                  </motion.span>
+                ))}
+              </motion.div>
             </motion.h1>
             <AnimatedText 
               el="h2" 
