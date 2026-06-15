@@ -91,6 +91,6 @@
   }
   
   .cohere-nav {
-    padding: 20px 24px;
+    display: none !important;
   }
 }
