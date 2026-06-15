@@ -23,25 +23,67 @@ export default function BottomNav() {
 
   // Sync active tab based on location hash or pathname
   useEffect(() => {
-    let currentId = 'home';
     if (location.pathname === '/partner') {
-      currentId = 'partner';
-    } else if (location.hash === '#portfolio') {
-      currentId = 'portfolio';
-    } else if (location.hash === '#investors') {
-      currentId = 'investors';
+      if (activeIndex !== 3) {
+        setActiveTab('partner');
+        animate(progress, 3, { type: "spring", stiffness: 450, damping: 22, mass: 0.8 });
+      }
+      return;
     }
+
+    // Scroll Spy for Home Page
+    const handleIntersect = (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          let newId = 'home';
+          if (entry.target.id === 'portfolio') newId = 'portfolio';
+          if (entry.target.id === 'investors') newId = 'investors';
+          
+          const idx = tabs.findIndex(t => t.id === newId);
+          if (idx !== -1) {
+            setActiveTab(newId);
+            animate(progress, idx, { type: "spring", stiffness: 450, damping: 22, mass: 0.8 });
+            
+            // Optionally update URL hash without scrolling
+            if (newId !== 'home') {
+              window.history.replaceState(null, '', `/#${newId}`);
+            } else {
+              window.history.replaceState(null, '', '/');
+            }
+          }
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, {
+      root: null,
+      rootMargin: "-40% 0px -40% 0px", // Trigger when section is near middle of screen
+      threshold: 0
+    });
+
+    const heroEl = document.getElementById('hero');
+    const portfolioEl = document.getElementById('portfolio');
+    const investorsEl = document.getElementById('investors');
+
+    if (heroEl) observer.observe(heroEl);
+    if (portfolioEl) observer.observe(portfolioEl);
+    if (investorsEl) observer.observe(investorsEl);
+
+    // Initial sync
+    let currentId = 'home';
+    if (location.hash === '#portfolio') currentId = 'portfolio';
+    else if (location.hash === '#investors') currentId = 'investors';
     
     const idx = tabs.findIndex(t => t.id === currentId);
-    if (idx !== -1 && idx !== activeIndex) {
+    if (idx !== -1) {
       setActiveTab(tabs[idx].id);
-      animate(progress, idx, { type: "spring", stiffness: 450, damping: 22, mass: 0.8 });
+      progress.set(idx);
     }
-  }, [location.pathname, location.hash]);
 
-  useEffect(() => {
-    progress.set(activeIndex);
-  }, []);
+    return () => {
+      observer.disconnect();
+    };
+  }, [location.pathname]);
 
   const DRAG_STEP_PX = 58;
   const startProgress = useMotionValue(0);
