@@ -5,9 +5,15 @@ import './About.css';
 
 const About = () => {
   const ref = useRef(null);
+  const textContainerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
+  });
+
+  const { scrollYProgress: textRevealProgress } = useScroll({
+    target: textContainerRef,
+    offset: ["start 85%", "end 45%"]
   });
 
   const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
@@ -33,15 +39,24 @@ const About = () => {
           <motion.div 
             className="about-text"
             style={{ y: yText }}
+            ref={textContainerRef}
           >
             <p className="mb-8 about-paragraph" style={{ color: 'var(--text-primary)' }}>
               Finlogue is the official finance and consulting syndicate of LNMIIT, Jaipur. We are a team of highly motivated students specialising in finance, business analytics, strategy, and operations.
             </p>
             <p className="mb-8 about-paragraph">
-              <ScrollTextReveal text="We work on live business problems, not textbooks. We run workshops, case studies, and industry sessions throughout the year. Now, we are taking that energy directly to startups and businesses like yours." />
+              <ScrollTextReveal 
+                text="We work on live business problems, not textbooks. We run workshops, case studies, and industry sessions throughout the year. Now, we are taking that energy directly to startups and businesses like yours." 
+                externalProgress={textRevealProgress}
+                baseRange={[0, 0.65]}
+              />
             </p>
             <p className="cohere-highlight about-paragraph">
-              <ScrollTextReveal text="We are not looking for projects to practise on. We are ready to deliver real work." />
+              <ScrollTextReveal 
+                text="We are not looking for projects to practise on. We are ready to deliver real work." 
+                externalProgress={textRevealProgress}
+                baseRange={[0.65, 1]}
+              />
             </p>
           </motion.div>
         </div>

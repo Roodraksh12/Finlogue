@@ -10,23 +10,29 @@ const ScrollWord = ({ children, progress, range }) => {
   );
 };
 
-const ScrollTextReveal = ({ text, className = '' }) => {
+const ScrollTextReveal = ({ text, className = '', externalProgress = null, baseRange = [0, 1] }) => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start 85%", "end 45%"]
   });
 
+  const progressToUse = externalProgress || scrollYProgress;
   const words = text.split(" ");
+  const [rangeStart, rangeEnd] = baseRange;
+  const rangeDiff = rangeEnd - rangeStart;
   
   return (
     <span ref={containerRef} style={{ display: 'inline-flex', flexWrap: 'wrap', gap: '0.25em' }} className={className}>
       {words.map((word, i) => {
-        const start = i / words.length;
-        // make the end overlap slightly for smoother effect
-        const end = start + (1.5 / words.length);
+        const wordStart = i / words.length;
+        const wordEnd = wordStart + (1.5 / words.length);
+        
+        const actualStart = rangeStart + (wordStart * rangeDiff);
+        const actualEnd = rangeStart + (wordEnd * rangeDiff);
+
         return (
-          <ScrollWord key={i} progress={scrollYProgress} range={[start, end]}>
+          <ScrollWord key={i} progress={progressToUse} range={[actualStart, actualEnd]}>
             {word}
           </ScrollWord>
         );
