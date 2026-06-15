@@ -53,8 +53,10 @@ const Navigation = () => {
               alt="Finlogue Logo" 
               style={{ height: "1.8em", marginRight: "10px", objectFit: "contain", display: "block" }} 
             />
-            <span>FIN</span>
-            <span className="logo-highlight">LOGUE</span>
+            <span className="desktop-only-flex" style={{ display: "flex", alignItems: "center" }}>
+              <span>FIN</span>
+              <span className="logo-highlight">LOGUE</span>
+            </span>
           </div>
         </div>
 

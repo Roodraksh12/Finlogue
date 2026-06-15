@@ -85,6 +85,10 @@
   .mobile-only {
     display: flex;
   }
+
+  .desktop-only-flex {
+    display: none !important;
+  }
   
   .cohere-nav {
     padding: 20px 24px;
