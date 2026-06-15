@@ -54,7 +54,7 @@ const Navigation = () => {
               style={{ height: "2.4em", marginRight: "12px", objectFit: "contain", display: "block" }} 
             />
             <span className="desktop-only-flex" style={{ display: "flex", alignItems: "center" }}>
-              <span>FIN</span>
+              <span style={{ color: "var(--color-coral)" }}>FIN</span>
               <span className="logo-highlight">LOGUE</span>
             </span>
           </div>
