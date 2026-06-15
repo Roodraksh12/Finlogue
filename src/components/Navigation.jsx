@@ -47,7 +47,10 @@ const Navigation = () => {
     <>
       <nav className="cohere-nav">
         <div className="nav-logo interactive" style={{ cursor: 'pointer' }} onClick={scrollToTop}>
-          <span className="logo-text">FINLOGUE</span>
+          <div className="logo-text">
+            <span>FIN</span>
+            <span className="logo-highlight">LOGUE</span>
+          </div>
         </div>
 
         <div className="nav-links desktop-only">
