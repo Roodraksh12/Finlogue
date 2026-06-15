@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 
-const ExplodingText = ({ text, className = '' }) => {
+const ExplodingText = ({ text, className = '', align = 'left' }) => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -23,8 +23,8 @@ const ExplodingText = ({ text, className = '' }) => {
         opacity, 
         scale,
         rotateX,
-        transformOrigin: "center center",
-        display: "inline-block",
+        transformOrigin: align === 'center' ? "center center" : "left center",
+        display: "block",
         willChange: "transform, filter, opacity, letter-spacing"
       }}
       className={className}

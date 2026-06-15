@@ -46,7 +46,7 @@ const Portfolio = () => {
           style={{ y: yHeader, perspective: "1000px" }}
         >
           <span className="mono-label">OUR WORK</span>
-          <ExplodingText text="Over 50 Startups Across Three Years" />
+          <ExplodingText text="Over 50 Startups Across Three Years" align="center" />
           <p className="cohere-trust-text">
             From fintech and agritech to SaaS and consumer brands, we deliver structured, high-impact solutions at no cost.
           </p>
