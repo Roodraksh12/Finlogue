@@ -13,7 +13,7 @@ const TextReveal = ({ text, className = "" }) => {
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: 0.05, delayChildren: 0.04 * i },
+      transition: { staggerChildren: 0.02, delayChildren: 0.04 * i },
     }),
   };
 
@@ -21,7 +21,6 @@ const TextReveal = ({ text, className = "" }) => {
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: {
         type: "spring",
         damping: 20,
@@ -31,7 +30,6 @@ const TextReveal = ({ text, className = "" }) => {
     hidden: {
       opacity: 0,
       y: 20,
-      filter: "blur(5px)",
       transition: {
         type: "spring",
         damping: 20,
