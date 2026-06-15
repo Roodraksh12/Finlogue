@@ -51,7 +51,7 @@ const Navigation = () => {
             <img 
               src="/logo-black.png" 
               alt="Finlogue Logo" 
-              style={{ height: "1.8em", marginRight: "10px", objectFit: "contain", display: "block" }} 
+              style={{ height: "2.4em", marginRight: "12px", objectFit: "contain", display: "block" }} 
             />
             <span className="desktop-only-flex" style={{ display: "flex", alignItems: "center" }}>
               <span>FIN</span>
