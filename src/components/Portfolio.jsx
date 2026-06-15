@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import SpotlightCard from './SpotlightCard';
+import AnimatedCounter from './AnimatedCounter';
 import './Portfolio.css';
 
 const startups = [
@@ -60,15 +61,15 @@ const Portfolio = () => {
               </p>
               <div className="potr-stats">
                 <div className="stat-item">
-                  <span className="stat-value">₹30 Cr+</span>
+                  <span className="stat-value"><AnimatedCounter from={0} to={30} prefix="₹" suffix=" Cr+" /></span>
                   <span className="stat-label mono-label">Funding Ask</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-value">25+</span>
+                  <span className="stat-value"><AnimatedCounter from={0} to={25} suffix="+" /></span>
                   <span className="stat-label mono-label">Startups Pitched</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-value">6+</span>
+                  <span className="stat-value"><AnimatedCounter from={0} to={6} suffix="+" /></span>
                   <span className="stat-label mono-label">Active Investors</span>
                 </div>
               </div>

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue, useMotionTemplate } from 'framer-motion';
 import AnimatedText from './AnimatedText';
 import './Hero.css';
 
@@ -47,9 +47,40 @@ const Hero = () => {
     }
   };
 
+  // Mouse Aura Logic
+  const mouseX = useMotionValue(typeof window !== "undefined" ? window.innerWidth / 2 : 0);
+  const mouseY = useMotionValue(typeof window !== "undefined" ? window.innerHeight / 2 : 0);
+
+  const handleMouseMove = (e) => {
+    mouseX.set(e.clientX);
+    mouseY.set(e.clientY);
+  };
+
   return (
-    <section className="hero-section" id="hero" ref={ref}>
-      <div className="container hero-container">
+    <section 
+      className="hero-section" 
+      id="hero" 
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      style={{ position: 'relative', overflow: 'hidden' }}
+    >
+      {/* Living Aura Background */}
+      <motion.div
+        className="pointer-events-none absolute inset-0 transition duration-300 hidden md:block"
+        style={{
+          background: useMotionTemplate`radial-gradient(800px circle at ${mouseX}px ${mouseY}px, rgba(201, 155, 83, 0.08), transparent 60%)`,
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 0,
+          willChange: 'background',
+          transform: 'translateZ(0)'
+        }}
+      />
+
+      <div className="container hero-container" style={{ position: 'relative', zIndex: 1 }}>
         
         <div className="hero-content">
           <motion.div 
@@ -90,10 +121,7 @@ const Hero = () => {
               Finance is not just learned at Finlogue—it is lived. We deliver real work, structured analysis, and actionable models to startups at zero cost.
             </motion.p>
           </motion.div>
-
-
         </div>
-
       </div>
     </section>
   );

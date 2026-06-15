@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import TextReveal from './TextReveal';
+import ScrollTextReveal from './ScrollTextReveal';
 import './About.css';
 
 const About = () => {
@@ -37,14 +37,14 @@ const About = () => {
             transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
             style={{ y: yText }}
           >
-            <p className="mb-8">
-              <TextReveal text="Finlogue is the official finance and consulting syndicate of LNMIIT, Jaipur. We are a team of highly motivated students specialising in finance, business analytics, strategy, and operations." />
+            <p className="mb-8" style={{ fontSize: '1.25rem', lineHeight: '1.6' }}>
+              <ScrollTextReveal text="Finlogue is the official finance and consulting syndicate of LNMIIT, Jaipur. We are a team of highly motivated students specialising in finance, business analytics, strategy, and operations." />
             </p>
-            <p className="mb-8">
-              <TextReveal text="We work on live business problems, not textbooks. We run workshops, case studies, and industry sessions throughout the year. Now, we are taking that energy directly to startups and businesses like yours." />
+            <p className="mb-8" style={{ fontSize: '1.25rem', lineHeight: '1.6' }}>
+              <ScrollTextReveal text="We work on live business problems, not textbooks. We run workshops, case studies, and industry sessions throughout the year. Now, we are taking that energy directly to startups and businesses like yours." />
             </p>
-            <p className="cohere-highlight">
-              <TextReveal text="We are not looking for projects to practise on. We are ready to deliver real work." />
+            <p className="cohere-highlight" style={{ fontSize: '1.25rem', lineHeight: '1.6' }}>
+              <ScrollTextReveal text="We are not looking for projects to practise on. We are ready to deliver real work." />
             </p>
           </motion.div>
         </div>
