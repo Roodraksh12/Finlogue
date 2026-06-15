@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
+import TextReveal from './TextReveal';
 import './Process.css';
 
 const processSteps = [
@@ -36,31 +37,50 @@ const processSteps = [
 ];
 
 const Process = () => {
+  const ref = useRef(null);
+
   return (
-    <section className="section process-section" id="process">
+    <section className="section process-section" id="process" ref={ref}>
       <div className="container">
         
-        <div className="process-header">
-          <span className="mono-label">HOW IT WORKS</span>
-          <h2>Six steps.<br/>We handle most of it.</h2>
-        </div>
-
-        <div className="cohere-editorial-list">
-          {processSteps.map((step, index) => (
+        <div className="process-layout">
+          <div className="process-header-sticky">
             <motion.div 
-              key={index}
-              className="editorial-row"
-              initial={{ opacity: 0, y: 10 }}
+              className="process-header"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
+              transition={{ type: "spring", stiffness: 100, damping: 20 }}
             >
-              <div className="row-number mono-label">{step.number}</div>
-              <div className="row-title"><h3>{step.title}</h3></div>
-              <div className="row-description"><p>{step.description}</p></div>
+              <span className="mono-label">HOW IT WORKS</span>
+              <h2>Six steps.<br/>We handle most of it.</h2>
             </motion.div>
-          ))}
+          </div>
+
+          <div className="cohere-editorial-list">
+            {processSteps.map((step, index) => {
+              return (
+                <motion.div 
+                  key={index}
+                  className="editorial-row interactive"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  whileHover={{ x: 10, backgroundColor: "rgba(0,0,0,0.02)" }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ type: "spring", stiffness: 120, damping: 20, delay: index * 0.1 }}
+                  style={{ borderRadius: "8px", padding: "16px", transition: "background-color 0.3s" }}
+                >
+                  <div className="row-number mono-label">{step.number}</div>
+                  <div className="row-title"><h3>{step.title}</h3></div>
+                  <div className="row-description">
+                    <p><TextReveal text={step.description} /></p>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
+
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import BottomNav from './BottomNav';
+import MagneticButton from './MagneticButton';
 import './Navigation.css';
 
 const Navigation = () => {
@@ -45,20 +46,22 @@ const Navigation = () => {
   return (
     <>
       <nav className="cohere-nav">
-        <div className="nav-logo" style={{ cursor: 'pointer' }} onClick={scrollToTop}>
+        <div className="nav-logo interactive" style={{ cursor: 'pointer' }} onClick={scrollToTop}>
           <span className="logo-text">FINLOGUE</span>
         </div>
 
         <div className="nav-links desktop-only">
           {links.map((link) => (
-            <a key={link} href={`#${link.toLowerCase()}`} className="nav-link" onClick={(e) => scrollToSection(e, link.toLowerCase())}>
+            <a key={link} href={`#${link.toLowerCase()}`} className="nav-link interactive" onClick={(e) => scrollToSection(e, link.toLowerCase())}>
               {link}
             </a>
           ))}
         </div>
 
         <div className="nav-actions desktop-only">
-          <a href="/partner" className="btn btn-primary" onClick={handlePartnerClick}>Partner With Us</a>
+          <MagneticButton className="btn btn-primary interactive" onClick={handlePartnerClick}>
+            Partner With Us
+          </MagneticButton>
         </div>
 
       </nav>

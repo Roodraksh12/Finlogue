@@ -1,29 +1,56 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import SpotlightCard from './SpotlightCard';
 import './Portfolio.css';
 
 const startups = [
-  { name: "FlexziStay", url: "" }, { name: "CloudGlance", url: "" }, { name: "Mr. Coconut", url: "" }, { name: "ProwPlus AI", url: "" },
-  { name: "PlotPatta", url: "" }, { name: "Snooze", url: "" }, { name: "Quable", url: "" }, { name: "SkyThrinetra", url: "" },
-  { name: "ModuloBytes", url: "" }, { name: "Scrap on Wheels", url: "" }, { name: "SensoVision", url: "" }, { name: "AugAid", url: "" },
-  { name: "Cit-Peels", url: "" }, { name: "Cubicles.com", url: "" }, { name: "IrrigaTech", url: "" }, { name: "LokChakra", url: "" },
-  { name: "AquAgri", url: "" }, { name: "Leucine", url: "" }, { name: "Eventz Book", url: "" }, { name: "Vzeya", url: "" }
+  { name: "FlexziStay", url: "https://www.linkedin.com/company/flexzistay/" },
+  { name: "CloudGlance", url: "https://www.linkedin.com/company/cloudglance/" },
+  { name: "Mr. Coconut", url: "https://www.linkedin.com/company/mr-coconut-india/" },
+  { name: "ProwPlus AI", url: "https://www.linkedin.com/company/prowplus/" },
+  { name: "PlotPatta", url: "https://www.linkedin.com/company/plotpatta/" },
+  { name: "Snooze", url: "https://www.linkedin.com/company/snoozemattressco/" },
+  { name: "Quable", url: "https://www.linkedin.com/company/quable/" },
+  { name: "SkyThrinetra", url: "https://www.linkedin.com/company/skythrinetra/" },
+  { name: "ModuloBytes", url: "https://www.linkedin.com/company/modulobytes/" },
+  { name: "Scrap on Wheels", url: "https://www.linkedin.com/company/scrap-on-wheels/" },
+  { name: "SensoVision", url: "https://www.linkedin.com/company/sensovision/" },
+  { name: "AugAid", url: "https://www.linkedin.com/company/augaid/" },
+  { name: "Cit-Peels", url: "https://www.linkedin.com/company/cit-peels/" },
+  { name: "Cubicles.com", url: "https://www.linkedin.com/company/cubicles-com/" },
+  { name: "IrrigaTech", url: "https://www.linkedin.com/company/irrigatech/" },
+  { name: "LokChakra", url: "https://www.linkedin.com/company/lokchakra/" },
+  { name: "AquAgri", url: "https://www.linkedin.com/company/aquagri/" },
+  { name: "Leucine", url: "https://www.linkedin.com/company/leucine/" },
+  { name: "Eventz Book", url: "https://www.linkedin.com/company/eventz-book/" },
+  { name: "Vzeya", url: "https://www.linkedin.com/company/vzeya/" }
 ];
 
 const Portfolio = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+
+  const yHeader = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+
   return (
-    <section className="section portfolio-section" id="portfolio">
+    <section className="section portfolio-section" id="portfolio" ref={ref}>
       <div className="container">
         
-        <div className="portfolio-header">
+        <motion.div 
+          className="portfolio-header"
+          style={{ y: yHeader }}
+        >
           <span className="mono-label">OUR WORK</span>
           <h2>Over 50 Startups Across Three Years</h2>
           <p className="cohere-trust-text">
             From fintech and agritech to SaaS and consumer brands, we deliver structured, high-impact solutions at no cost.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="potr-band">
+        <SpotlightCard className="potr-band">
           <div className="potr-content">
             <span className="mono-label" style={{color: 'rgba(255,255,255,0.7)'}}>FLAGSHIP EVENT</span>
             <h3>Pitch on the Rocks (POTR) 2026</h3>
@@ -45,20 +72,21 @@ const Portfolio = () => {
               </div>
             </div>
           </div>
-        </div>
+        </SpotlightCard>
 
         <div className="cohere-trust-strip">
           {startups.map((startup, index) => (
             <motion.div 
               key={index}
-              className="trust-logo-text"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.3, delay: (index % 10) * 0.05 }}
+              className="trust-logo-text interactive"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              whileHover={{ scale: 1.1, translateY: -5, color: "var(--color-action-blue)" }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ type: "spring", stiffness: 150, damping: 20, delay: (index % 10) * 0.05 }}
             >
               {startup.url ? (
-                <a href={startup.url} target="_blank" rel="noopener noreferrer" className="startup-link">
+                <a href={startup.url} target="_blank" rel="noopener noreferrer" className="startup-link interactive">
                   {startup.name}
                 </a>
               ) : (

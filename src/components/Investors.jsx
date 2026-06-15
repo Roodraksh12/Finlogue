@@ -7,7 +7,7 @@ const investorsData = [
     name: "Aman M. Tekriwal",
     initials: "AT",
     image: "/investors/aman.jpg",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/aman-m-tekriwal-6a77169/",
     role: "Angel Investor | Venture Partner",
     desc: "A visionary in finance and entrepreneurship, Mr. Aman Tekriwal is the Co-Founder of Maxar.vc, one of India's leading angel syndicates, and a Venture Partner at PitchRight Ventures."
   },
@@ -15,7 +15,7 @@ const investorsData = [
     name: "Krishna Dev Pathak",
     initials: "KP",
     image: "/investors/krishna.jpg",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/kdpathak/",
     role: "Investment Banking",
     desc: "Private markets, Value Bridge Capital. A finance professional with a specialization in investment banking and private markets, Mr. Krishna Dev Pathak combines analytical precision with strategic insight."
   },
@@ -23,7 +23,7 @@ const investorsData = [
     name: "Sidharth Pandey",
     initials: "SP",
     image: "/investors/sidharth.jpg",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/pandeysid/",
     role: "VP, Paytm (Former)",
     desc: "As VP of Paytm, he built and scaled a $2B payments and distribution business, pioneering QR payments and subscription services like Paytm First."
   },
@@ -31,7 +31,7 @@ const investorsData = [
     name: "Siddhant Gupta",
     initials: "SG",
     image: "/investors/siddhant.jpg",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/siddhant-gupta-/",
     role: "Founder, Skillson | Former VP, Sixth Sense Ventures",
     desc: "An ISB Gold Medalist MBA, Mr. Siddhant Gupta is the Founder of Skillson, a platform redefining career readiness in Venture Capital and Consulting."
   },
@@ -39,7 +39,7 @@ const investorsData = [
     name: "Vartul Jain",
     initials: "VJ",
     image: "/investors/vartul.jpg",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/vartul-jain-0ba04a166/",
     role: "Angel Investor | Strategic Inv. Advisor",
     desc: "An emerging leader in strategic finance, Mr. Vartul Jain brings expertise in venture analysis, startup evaluation, and growth strategy. Having started his investment journey with Inflection Point Ventures."
   },
@@ -47,7 +47,7 @@ const investorsData = [
     name: "Garima Seth",
     initials: "GS",
     image: "/investors/garima.jpg",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/garimaseth1/",
     role: "VP, Value Bridge Capital | Former Founder, Boon Capital",
     desc: "With over 20 years of experience in investment banking and venture funding."
   },
@@ -55,7 +55,7 @@ const investorsData = [
     name: "Ninad Karpe",
     initials: "NK",
     image: "/investors/ninad.jpg",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/ninadkarpe/",
     role: "Founder, Karpe Diem Ventures | Partner, 100X.VC",
     desc: "Founder of Karpe Diem Ventures which invests in early stage startups in India. He is also the Founder & Partner at 100X.VC."
   }
@@ -81,11 +81,12 @@ const Investors = () => {
           {investorsData.map((investor, index) => (
             <motion.div 
               key={index}
-              className="investor-card"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: (index % 3) * 0.1 }}
+              className="investor-card interactive"
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              whileHover={{ scale: 1.05, translateY: -5 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ type: "spring", stiffness: 150, damping: 20, delay: (index % 3) * 0.1 }}
             >
               <div className="investor-avatar">
                 {investor.image && !imgErrors[index] ? (

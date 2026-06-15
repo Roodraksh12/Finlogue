@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './PartnerPage.css';
 
 const PartnerPage = () => {
@@ -11,6 +11,14 @@ const PartnerPage = () => {
     email: ''
   });
   const [status, setStatus] = useState('idle'); // 'idle', 'submitting', 'success', 'error'
+  
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+
+  const yHeader = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
 
   const handleChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -22,7 +30,6 @@ const PartnerPage = () => {
     
     const GOOGLE_FORM_ACTION_URL = "https://docs.google.com/forms/d/e/1FAIpQLSdbv1_mhVZNHuh-kn5PO_5DMggkZSXr7XVgNpQ_4YS-RxDOzQ/formResponse";
     
-    // Map our local React state to the exact hidden entry IDs from your Google Form
     const formPayload = new URLSearchParams();
     formPayload.append("entry.31366759", formData.startupName);
     formPayload.append("entry.1705616871", formData.founderName);
@@ -49,13 +56,23 @@ const PartnerPage = () => {
   };
 
   return (
-    <main className="partner-page">
+    <motion.main 
+      className="partner-page"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+      ref={ref}
+    >
       <div className="container">
-        <div className="partner-header">
+        <motion.div 
+          className="partner-header"
+          style={{ y: yHeader }}
+        >
           <span className="mono-label">PARTNERSHIPS</span>
           <h2>Let's build something together.</h2>
           <p>Fill out the form below and we'll get back to you shortly.</p>
-        </div>
+        </motion.div>
 
         <div className="form-container">
           {status === 'success' ? (
@@ -85,7 +102,7 @@ const PartnerPage = () => {
                 <label htmlFor="email">Corporate Email Address <span style={{ color: 'var(--color-coral)' }}>*</span></label>
                 <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required />
               </div>
-              <button type="submit" className="btn btn-primary form-submit" disabled={status === 'submitting'}>
+              <button type="submit" className="btn btn-primary form-submit interactive" disabled={status === 'submitting'}>
                 {status === 'submitting' ? 'Submitting...' : 'Submit Details'}
               </button>
               {status === 'error' && <p className="error-message">Something went wrong. Please try again.</p>}
@@ -93,7 +110,7 @@ const PartnerPage = () => {
           )}
         </div>
       </div>
-    </main>
+    </motion.main>
   );
 };
 

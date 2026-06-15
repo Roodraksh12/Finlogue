@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import About from '../components/About';
 import Offerings from '../components/Offerings';
@@ -9,7 +10,12 @@ import Investors from '../components/Investors';
 
 const HomePage = () => {
   return (
-    <main>
+    <motion.main
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4, ease: "easeInOut" }}
+    >
       <Hero />
       <About />
       <Offerings />
@@ -17,7 +23,7 @@ const HomePage = () => {
       <Capabilities />
       <Portfolio />
       <Investors />
-    </main>
+    </motion.main>
   );
 };
 

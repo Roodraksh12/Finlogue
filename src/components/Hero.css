@@ -27,6 +27,13 @@
   margin-bottom: 24px;
 }
 
+.hero-subhead {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin-bottom: 24px;
+  font-weight: 400;
+  display: block;
+}
+
 .hero-subtitle {
   font-size: 1.25rem;
   color: var(--color-ink);
@@ -117,11 +124,30 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    padding-top: 40px;
+    padding-top: 24px;
   }
   
+  .hero-text-block h1 {
+    margin-bottom: 16px;
+  }
+  
+  .hero-subhead {
+    margin-bottom: 16px;
+  }
+  
+  .hero-subtitle {
+    margin-bottom: 32px;
+  }
+
   .hero-actions {
     flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
   }
   
   .cohere-media-card {

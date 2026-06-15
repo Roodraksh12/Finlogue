@@ -62,7 +62,17 @@
 }
 
 @media (max-width: 768px) {
+  .offerings-header {
+    margin-bottom: 40px;
+  }
   .cohere-card-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .dark-panel-card {
+    padding: 24px;
+  }
+  .panel-icon {
+    margin-bottom: 16px;
   }
 }

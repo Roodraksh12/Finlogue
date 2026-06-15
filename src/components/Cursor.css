@@ -1,0 +1,24 @@
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  background-color: var(--color-ink); /* Replaced dynamically in React */
+  transform-origin: center;
+  /* Add a little blur for a smoother aesthetic */
+  backdrop-filter: blur(2px);
+}
+
+/* Hide default cursor globally */
+body {
+  cursor: none;
+}
+
+/* Also hide cursor on interactive elements */
+a, button, .btn, .interactive {
+  cursor: none !important;
+}
