@@ -31,7 +31,9 @@
   backdrop-filter: blur(10px) saturate(180%);
   transform: translate3d(0, 0, 0);
   
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  will-change: width, height, transform;
+  transform: translateZ(0);
   padding: 6px;
   border-radius: 9999px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05);

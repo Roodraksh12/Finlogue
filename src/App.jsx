@@ -25,9 +25,9 @@ function App() {
       <div className="app-container">
         <Noise />
         {/* Background Ambient Orbs */}
-        <motion.div style={{ y }} className="ambient-orb orb-1"></motion.div>
-        <motion.div style={{ y: y2 }} className="ambient-orb orb-2"></motion.div>
-        <motion.div style={{ y }} className="ambient-orb orb-3"></motion.div>
+        <motion.div style={{ y, willChange: 'transform', transform: 'translateZ(0)' }} className="ambient-orb orb-1"></motion.div>
+        <motion.div style={{ y: y2, willChange: 'transform', transform: 'translateZ(0)' }} className="ambient-orb orb-2"></motion.div>
+        <motion.div style={{ y, willChange: 'transform', transform: 'translateZ(0)' }} className="ambient-orb orb-3"></motion.div>
 
         <Navigation />
         

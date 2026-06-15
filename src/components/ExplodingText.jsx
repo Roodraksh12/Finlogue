@@ -25,7 +25,8 @@ const ExplodingText = ({ text, className = '', align = 'left' }) => {
         rotateX,
         transformOrigin: align === 'center' ? "center center" : "left center",
         display: "block",
-        willChange: "transform, filter, opacity, letter-spacing"
+        willChange: "transform, filter, opacity, letter-spacing",
+        transform: "translateZ(0)"
       }}
       className={className}
     >
