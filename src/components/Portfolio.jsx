@@ -50,50 +50,49 @@ const Portfolio = () => {
           </p>
         </motion.div>
 
-        <SpotlightCard className="potr-band">
-          <div className="potr-content">
-            <span className="mono-label" style={{ color: 'rgba(255,255,255,0.7)' }}>FLAGSHIP EVENT</span>
-            <h3>Pitch on the Rocks (POTR) 2026</h3>
-            <p>
-              Our annual startup-investor engagement event marking structured evaluation, quality screening, and high-impact founder-investor interactions.
-            </p>
-            <div className="potr-stats">
-              <div className="stat-item">
-                <span className="stat-value">₹30 Cr+</span>
-                <span className="stat-label mono-label">Funding Ask</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-value">25+</span>
-                <span className="stat-label mono-label">Startups Pitched</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-value">6+</span>
-                <span className="stat-label mono-label">Active Investors</span>
+        <div className="potr-glow-wrapper">
+          <SpotlightCard className="potr-band">
+            <div className="potr-content">
+              <span className="mono-label" style={{ color: 'rgba(255,255,255,0.7)' }}>FLAGSHIP EVENT</span>
+              <h3>Pitch on the Rocks (POTR) 2026</h3>
+              <p>
+                Our annual startup-investor engagement event marking structured evaluation, quality screening, and high-impact founder-investor interactions.
+              </p>
+              <div className="potr-stats">
+                <div className="stat-item">
+                  <span className="stat-value">₹30 Cr+</span>
+                  <span className="stat-label mono-label">Funding Ask</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-value">25+</span>
+                  <span className="stat-label mono-label">Startups Pitched</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-value">6+</span>
+                  <span className="stat-label mono-label">Active Investors</span>
+                </div>
               </div>
             </div>
-          </div>
-        </SpotlightCard>
+          </SpotlightCard>
+        </div>
 
-        <div className="cohere-trust-strip">
-          {startups.map((startup, index) => (
-            <motion.div
-              key={index}
-              className="trust-logo-text interactive"
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              whileHover={{ scale: 1.1, translateY: -5, color: "var(--color-action-blue)" }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ type: "spring", stiffness: 150, damping: 20, delay: (index % 10) * 0.05 }}
-            >
-              {startup.url ? (
-                <a href={startup.url} target="_blank" rel="noopener noreferrer" className="startup-link interactive">
-                  {startup.name}
-                </a>
-              ) : (
-                startup.name
-              )}
-            </motion.div>
-          ))}
+        <div className="marquee-container">
+          <div className="marquee-content">
+            {[...startups, ...startups].map((startup, index) => (
+              <div
+                key={index}
+                className="trust-logo-text interactive"
+              >
+                {startup.url ? (
+                  <a href={startup.url} target="_blank" rel="noopener noreferrer" className="startup-link interactive">
+                    {startup.name}
+                  </a>
+                ) : (
+                  startup.name
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
       </div>

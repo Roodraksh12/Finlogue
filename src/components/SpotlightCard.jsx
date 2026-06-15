@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { motion, useMotionValue, useMotionTemplate } from 'framer-motion';
+import { motion, useMotionValue, useMotionTemplate, useTransform, useSpring } from 'framer-motion';
 
 const SpotlightCard = ({ children, className = '' }) => {
   const divRef = useRef(null);
@@ -8,12 +8,36 @@ const SpotlightCard = ({ children, className = '' }) => {
   
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+  
+  // Normalized coordinates from -0.5 to 0.5
+  const cardX = useMotionValue(0);
+  const cardY = useMotionValue(0);
+
+  // Map to a maximum rotation of 7 degrees for subtle premium feel
+  const rotateX = useTransform(cardY, [-0.5, 0.5], [7, -7]);
+  const rotateY = useTransform(cardX, [-0.5, 0.5], [-7, 7]);
+
+  // Apply spring physics for smooth return to resting state
+  const smoothRotateX = useSpring(rotateX, { stiffness: 300, damping: 30 });
+  const smoothRotateY = useSpring(rotateY, { stiffness: 300, damping: 30 });
 
   const handleMouseMove = (e) => {
     if (!divRef.current || isFocused) return;
-    const { left, top } = divRef.current.getBoundingClientRect();
-    mouseX.set(e.clientX - left);
-    mouseY.set(e.clientY - top);
+    const { left, top, width, height } = divRef.current.getBoundingClientRect();
+    const x = e.clientX - left;
+    const y = e.clientY - top;
+    
+    mouseX.set(x);
+    mouseY.set(y);
+    
+    cardX.set((x / width) - 0.5);
+    cardY.set((y / height) - 0.5);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    cardX.set(0);
+    cardY.set(0);
   };
 
   return (
@@ -23,9 +47,15 @@ const SpotlightCard = ({ children, className = '' }) => {
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseLeave={handleMouseLeave}
       className={`relative overflow-hidden ${className}`}
-      style={{ position: 'relative', overflow: 'hidden' }}
+      style={{ 
+        position: 'relative', 
+        overflow: 'hidden',
+        rotateX: smoothRotateX,
+        rotateY: smoothRotateY,
+        transformPerspective: 1000
+      }}
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll } from 'framer-motion';
 import TextReveal from './TextReveal';
 import './Process.css';
 
@@ -38,6 +38,10 @@ const processSteps = [
 
 const Process = () => {
   const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start center", "end center"]
+  });
 
   return (
     <section className="section process-section" id="process" ref={ref}>
@@ -58,6 +62,10 @@ const Process = () => {
           </div>
 
           <div className="cohere-editorial-list">
+            <div className="scroll-path-container">
+              <div className="scroll-path-bg" />
+              <motion.div className="scroll-path-fill" style={{ scaleY: scrollYProgress }} />
+            </div>
             {processSteps.map((step, index) => {
               return (
                 <motion.div 

@@ -20,12 +20,35 @@
   margin: 0 auto;
 }
 
+.potr-glow-wrapper {
+  position: relative;
+  padding: 1px;
+  border-radius: var(--radius-md);
+  margin-bottom: 80px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.potr-glow-wrapper::before {
+  content: "";
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  background: conic-gradient(transparent 60%, var(--color-action-blue) 80%, var(--color-coral) 100%);
+  animation: spin 4s linear infinite;
+  z-index: -2;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .potr-band {
   background-color: var(--color-dark-navy);
   color: var(--color-canvas);
-  border-radius: var(--radius-md);
+  border-radius: calc(var(--radius-md) - 1px);
   padding: 64px;
-  margin-bottom: 80px;
 }
 
 .potr-content {
@@ -68,28 +91,49 @@
   font-size: 0.75rem;
 }
 
-.cohere-trust-strip {
+.marquee-container {
+  overflow: hidden;
+  white-space: nowrap;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 40px;
-  padding-top: 40px;
+  position: relative;
+  width: 100%;
+  padding: 40px 0;
   border-top: 1px solid var(--color-hairline);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-content {
+  display: flex;
+  gap: 64px;
+  animation: scrollMarquee 40s linear infinite;
+  min-width: max-content;
+  padding-right: 64px; /* Matches gap */
+}
+
+.marquee-container:hover .marquee-content {
+  animation-play-state: paused;
+}
+
+@keyframes scrollMarquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 .trust-logo-text {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: var(--color-slate);
   opacity: 0.6;
-  transition: opacity 0.3s ease, color 0.3s ease;
-  cursor: default;
+  transition: opacity 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .trust-logo-text:hover {
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  opacity: 1;
+  color: var(--color-action-blue);
+  transform: scale(1.05) translateY(-2px);
 }
 
 .startup-link {
@@ -99,12 +143,13 @@
 }
 
 .startup-link:hover {
-  color: var(--color-coral);
+  color: var(--color-action-blue);
 }
 
 @media (max-width: 1024px) {
-  .cohere-trust-strip {
-    gap: 32px;
+  .marquee-content {
+    gap: 48px;
+    padding-right: 48px;
   }
 }
 
