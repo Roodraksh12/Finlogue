@@ -95,7 +95,7 @@ const Hero = () => {
               animate="visible"
               style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "2px" }}
             >
-              <div style={{ display: "flex" }}>
+              <div style={{ display: "flex", color: "var(--color-coral)" }}>
                 {"FIN".split("").map((letter, index) => (
                   <motion.span 
                     key={`fin-${index}`} 
@@ -150,7 +150,7 @@ const Hero = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              Finance is not just learned at Finlogue—it is lived. We deliver real work, structured analysis, and actionable models to startups at zero cost.
+              Finance is not just learned at Finlogue—it is lived. We deliver real work, structured analysis, and actionable models to startups at <strong style={{ fontWeight: 600 }}>zero cost</strong>.
             </motion.p>
           </motion.div>
         </div>

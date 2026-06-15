@@ -22,7 +22,7 @@ const Footer = () => {
             <span className="divider">|</span>
             <span>Finance Syndicate of LNMIIT</span>
             <span className="divider">|</span>
-            <span>2025-26</span>
+            <span>2026-2027</span>
           </div>
 
           <div className="footer-socials">
