@@ -155,7 +155,7 @@
 
 @media (max-width: 768px) {
   .potr-band {
-    padding: 32px;
+    padding: 24px;
   }
   
   .potr-content h3 {
@@ -164,7 +164,7 @@
   
   .potr-stats {
     flex-direction: column;
-    gap: 32px;
+    gap: 16px;
   }
   
   .cohere-trust-strip {

@@ -19,6 +19,13 @@
   }
 }
 
+@media (max-width: 400px) {
+  .bottom-nav-container {
+    transform: scale(0.9);
+    transform-origin: bottom center;
+  }
+}
+
 .bottom-nav-pill {
   position: relative;
   display: flex;

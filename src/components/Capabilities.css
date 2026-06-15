@@ -41,3 +41,13 @@
     font-size: 1rem;
   }
 }
+
+@media (max-width: 480px) {
+  .cohere-taxonomy-chips {
+    gap: 8px;
+  }
+  .blog-filter-chip {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+  }
+}
