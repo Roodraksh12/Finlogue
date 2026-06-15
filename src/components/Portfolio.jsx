@@ -61,7 +61,7 @@ const Portfolio = () => {
               </p>
               <div className="potr-stats">
                 <div className="stat-item">
-                  <span className="stat-value"><AnimatedCounter from={0} to={30} prefix="₹" suffix=" Cr+" /></span>
+                  <span className="stat-value"><AnimatedCounter from={0} to={80} prefix="₹" suffix=" Cr+" /></span>
                   <span className="stat-label mono-label">Funding Ask</span>
                 </div>
                 <div className="stat-item">
