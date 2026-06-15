@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import SpotlightCard from './SpotlightCard';
 import AnimatedCounter from './AnimatedCounter';
+import ExplodingText from './ExplodingText';
 import './Portfolio.css';
 
 const startups = [
@@ -42,10 +43,10 @@ const Portfolio = () => {
 
         <motion.div
           className="portfolio-header"
-          style={{ y: yHeader }}
+          style={{ y: yHeader, perspective: "1000px" }}
         >
           <span className="mono-label">OUR WORK</span>
-          <h2>Over 50 Startups Across Three Years</h2>
+          <ExplodingText text="Over 50 Startups Across Three Years" />
           <p className="cohere-trust-text">
             From fintech and agritech to SaaS and consumer brands, we deliver structured, high-impact solutions at no cost.
           </p>

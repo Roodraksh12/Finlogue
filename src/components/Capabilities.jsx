@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import ExplodingText from './ExplodingText';
 import './Capabilities.css';
 
 const capabilitiesList = [
@@ -29,10 +30,10 @@ const Capabilities = () => {
       <div className="container">
         <motion.div 
           className="capabilities-header"
-          style={{ y: yHeader }}
+          style={{ y: yHeader, perspective: "1000px" }}
         >
           <span className="mono-label">EXPERTISE</span>
-          <h2>A flexible skill set.</h2>
+          <ExplodingText text="A flexible skill set." />
           <p>
             Whatever your core problem is, we likely have someone who has looked at it before. Our capabilities cover a broad range of business needs.
           </p>

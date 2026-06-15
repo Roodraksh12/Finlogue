@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
-import { motion, useScroll } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import TextReveal from './TextReveal';
+import ExplodingText from './ExplodingText';
 import './Process.css';
 
 const processSteps = [
@@ -43,6 +44,8 @@ const Process = () => {
     offset: ["start center", "end center"]
   });
 
+  const yHeader = useTransform(scrollYProgress, [0, 1], [0, 100]);
+
   return (
     <section className="section process-section" id="process" ref={ref}>
       <div className="container">
@@ -51,13 +54,14 @@ const Process = () => {
           <div className="process-header-sticky">
             <motion.div 
               className="process-header"
+              style={{ y: yHeader, perspective: "1000px" }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ type: "spring", stiffness: 100, damping: 20 }}
             >
               <span className="mono-label">HOW IT WORKS</span>
-              <h2>Six steps.<br/>We handle most of it.</h2>
+              <ExplodingText text="Six steps. We handle most of it." />
             </motion.div>
           </div>
 
