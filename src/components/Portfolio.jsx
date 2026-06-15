@@ -66,7 +66,7 @@ const Portfolio = () => {
                   <span className="stat-label mono-label">Funding Ask</span>
                 </div>
                 <div className="stat-item">
-                  <span className="stat-value"><AnimatedCounter from={0} to={25} suffix="+" /></span>
+                  <span className="stat-value"><AnimatedCounter from={0} to={45} suffix="+" /></span>
                   <span className="stat-label mono-label">Startups Pitched</span>
                 </div>
                 <div className="stat-item">
