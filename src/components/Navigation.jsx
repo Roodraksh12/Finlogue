@@ -51,7 +51,7 @@ const Navigation = () => {
             <img 
               src="/logo-black.png" 
               alt="Finlogue Logo" 
-              style={{ height: "1.2em", marginRight: "6px", objectFit: "contain", display: "block" }} 
+              style={{ height: "1.8em", marginRight: "10px", objectFit: "contain", display: "block" }} 
             />
             <span>FIN</span>
             <span className="logo-highlight">LOGUE</span>
