@@ -14,7 +14,7 @@ const ScrollTextReveal = ({ text, className = '' }) => {
   const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 80%", "center center"]
+    offset: ["start 85%", "end 45%"]
   });
 
   const words = text.split(" ");
