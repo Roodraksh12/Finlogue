@@ -44,7 +44,7 @@ const Process = () => {
     offset: ["start center", "end center"]
   });
 
-  const yHeader = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const yHeader = useTransform(scrollYProgress, [0, 1], [0, -100]);
 
   return (
     <section className="section process-section" id="process" ref={ref}>

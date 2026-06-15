@@ -23,7 +23,7 @@ const Capabilities = () => {
     offset: ["start end", "end start"]
   });
 
-  const yHeader = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const yHeader = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
 
   return (
     <section className="section capabilities-section" id="capabilities" ref={ref}>
