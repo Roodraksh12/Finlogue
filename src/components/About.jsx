@@ -10,8 +10,9 @@ const About = () => {
     offset: ["start end", "end start"]
   });
 
-  const yHeader = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const yHeader = useTransform(scrollYProgress, [0, 1], ["0%", isMobile ? "0%" : "30%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", isMobile ? "0%" : "-10%"]);
 
   return (
     <section className="section about-section" id="about" ref={ref}>
@@ -37,13 +38,13 @@ const About = () => {
             transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
             style={{ y: yText }}
           >
-            <p className="mb-8" style={{ fontSize: '1.25rem', lineHeight: '1.6' }}>
+            <p className="mb-8 about-paragraph">
               <ScrollTextReveal text="Finlogue is the official finance and consulting syndicate of LNMIIT, Jaipur. We are a team of highly motivated students specialising in finance, business analytics, strategy, and operations." />
             </p>
-            <p className="mb-8" style={{ fontSize: '1.25rem', lineHeight: '1.6' }}>
+            <p className="mb-8 about-paragraph">
               <ScrollTextReveal text="We work on live business problems, not textbooks. We run workshops, case studies, and industry sessions throughout the year. Now, we are taking that energy directly to startups and businesses like yours." />
             </p>
-            <p className="cohere-highlight" style={{ fontSize: '1.25rem', lineHeight: '1.6' }}>
+            <p className="cohere-highlight about-paragraph">
               <ScrollTextReveal text="We are not looking for projects to practise on. We are ready to deliver real work." />
             </p>
           </motion.div>

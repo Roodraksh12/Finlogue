@@ -18,9 +18,10 @@
   padding-top: 40px; /* Align with h2 baseline approximately */
 }
 
-.about-text p {
+.about-paragraph {
   margin-bottom: 32px;
   font-size: 1.25rem;
+  line-height: 1.6;
   color: var(--color-ink);
 }
 
@@ -47,5 +48,14 @@
   
   .about-text {
     padding-top: 0;
+  }
+  
+  .about-header h2 {
+    font-size: 2.25rem;
+    margin-bottom: 16px;
+  }
+
+  .about-paragraph {
+    font-size: 1.125rem;
   }
 }
