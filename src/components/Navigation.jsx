@@ -48,6 +48,11 @@ const Navigation = () => {
       <nav className="cohere-nav">
         <div className="nav-logo interactive" style={{ cursor: 'pointer' }} onClick={scrollToTop}>
           <div className="logo-text">
+            <img 
+              src="/logo-black.png" 
+              alt="Finlogue Logo" 
+              style={{ height: "1.2em", marginRight: "6px", objectFit: "contain", display: "block" }} 
+            />
             <span>FIN</span>
             <span className="logo-highlight">LOGUE</span>
           </div>
