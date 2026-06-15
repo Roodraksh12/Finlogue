@@ -95,6 +95,25 @@ const Hero = () => {
               animate="visible"
               style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "2px" }}
             >
+              <motion.img 
+                src="/logo-black.png" 
+                alt="Finlogue Logo"
+                variants={{
+                  hidden: letterVariants.hidden,
+                  visible: {
+                    ...letterVariants.visible,
+                    transition: { ...letterVariants.visible.transition, delay: 0.1 }
+                  }
+                }}
+                style={{ 
+                  height: "0.85em", 
+                  marginRight: "0.15em",
+                  willChange: "transform, filter, opacity",
+                  display: "inline-block",
+                  objectFit: "contain"
+                }}
+              />
+              
               <div style={{ display: "flex" }}>
                 {"FIN".split("").map((letter, index) => (
                   <motion.span 
