@@ -54,7 +54,7 @@ const Cursor = () => {
         translateX: cursorXSpring,
         translateY: cursorYSpring,
         willChange: "transform, opacity, scale, background-color, mix-blend-mode",
-        transform: "translateZ(0)"
+        z: 0
       }}
       animate={{
         scale: isHidden ? 0 : isHovered ? 2 : 1,
