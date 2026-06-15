@@ -6,8 +6,6 @@ import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import PartnerPage from './pages/PartnerPage';
-import Noise from './components/Noise';
-
 function App() {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
@@ -23,7 +21,6 @@ function App() {
   return (
     <>
       <div className="app-container">
-        <Noise />
         {/* Background Ambient Orbs */}
         <motion.div style={{ y, willChange: 'transform', z: 0 }} className="ambient-orb orb-1"></motion.div>
         <motion.div style={{ y: y2, willChange: 'transform', z: 0 }} className="ambient-orb orb-2"></motion.div>
